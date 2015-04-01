@@ -142,9 +142,11 @@ function requestWord(){
 }
 
 function favoriteVideo(word){
+  console.log(word);
    if(!(word in user_words)){
-
-    user_words.word = {url: 'url/ant', Display: word, username: current_user};
+    console.log(word);
+    document.querySelector('#star').src = 'Widgets/star_clicked.png';
+    user_words[word] = {url: 'url/ant', Display: word, username: current_user};
    }
 }
 
@@ -152,7 +154,15 @@ function videoPlayback(word){
   // dictionary();
 	console.log("videoPlayback: "+word);
   html = "";
-  html += "<div id='videoContainer'><div id='favoriteVideo' onclick= favoriteVideo('"+word+"')><img id='star' src='Widgets/star.png'></div>";
+  html += "<div id='videoContainer'><div id='favoriteVideo' onclick= favoriteVideo('"+word+"')>";
+
+  if(word in user_words){
+      html +="<img id='star' src='Widgets/star_clicked.png'></div>";
+  }
+  else{
+     html+="<img id='star' src='Widgets/star.png'></div>";
+  }
+
 	html += "<video width=\"400\" controls><source src=\"" + word + ".mp4\" type=\"video/mp4\"></video></div>";
 	html += document.getElementById("video_playback").innerHTML;
     document.getElementById("dictionary_video").innerHTML= html;
@@ -205,18 +215,18 @@ function fingerSpeller(){
     "</div>"+
     "<div id='FScontrols'>"+
       "<ul>"+
-        "<li id='pause' onclick='pause()' class='btn'><a><div class='buttonContainer'><img id='pauseCSS' src='Widgets/pause.png'></div>"+
-          "</a></li>"+
+        "<li id='pause' onclick='pause()' class='btn'><div class='buttonContainer'><img id='pauseCSS' src='Widgets/pause.png'></div>"+
+          "</li>"+
         "<li id='play' onclick='play()' class='btn' ><div class='buttonContainer'><img id ='playCSS' src='Widgets/play.png'></div>"+
           "</li>"+
-        "<li id='slower' class='btn' onclick='slower()' ><a>slower"+
-         "</a></li>"  +
-       "<li id='faster' class='btn' onclick='faster()'><a>faster"+
-          "</a></li> " +
-        "<li id='prev' class='btn' onclick='previous()''><a><div class='buttonContainer'><img id='leftCSS' src='Widgets/l_arrow.png'></div>"+
-          "</a></li> "+
-        "<li id='next' class='btn' onclick='next()'><a><div class='buttonContainer'><img id='rightCSS' src='Widgets/r_arrow.png'></div>"+
-          "</a></li> " +
+        "<li id='slower' class='btn' onclick='slower()' >slower"+
+         "</li>"  +
+       "<li id='faster' class='btn' onclick='faster()'>faster"+
+          "</li> " +
+        "<li id='prev' class='btn' onclick='previous()''><div class='buttonContainer'><img id='leftCSS' src='Widgets/l_arrow.png'></div>"+
+          "</li> "+
+        "<li id='next' class='btn' onclick='next()'><div class='buttonContainer'><img id='rightCSS' src='Widgets/r_arrow.png'></div>"+
+          "</li> " +
         "<li ><input id='inputWord' type='text'>" +
         "</li>" +
      "</ul>" +

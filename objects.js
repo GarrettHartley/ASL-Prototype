@@ -1,16 +1,20 @@
 var dict = {
-	Blue: {url: 'url/ant', Display: 'Blue', unit: '1'},
-	Hello: {url:'url/Bug', Display: 'Hello', unit: '2'},
-	Which: {url:'url/cat', Display: 'Which', unit: '3'},
+	Salt: {url: 'url/ant', Display: 'Salt', unit: '1'},
+	Salad: {url:'url/Bug', Display: 'Salad', unit: '2'},
+	Saint: {url:'url/cat', Display: 'Saint', unit: '3'},
+	Simple: {url:'url/cat', Display: 'Simple', unit: '3'},
+	Screwdriver: {url:'url/cat', Display: 'Screwdriver', unit: '2'},
 };
 
 var current_user = 'Joe';
 var logged_in = false;
 
 var user_words = {
-	Blue: {url:'url/Bug', Display: 'Blue', username: 'Joe'},
-	Hello: {url:'url/cat', Display: 'Hello', username: 'Joe'},
-	Which: {url: 'url/ant', Display: 'Which', username: 'Joe'},
+	Salt: {url:'url/Bug', thumbnail:'', Display: 'Salt', username: 'Joe'},
+	Salad: {url:'url/cat', thumbnail:'',  Display: 'Salad', username: 'Joe'},
+	Saint: {url: 'url/ant', thumbnail:'',  Display: 'Saint', username: 'Joe'},
+	Simple: {url: 'url/ant', thumbnail:'',  Display: 'Simple', username: 'Joe'},
+	Screwdriver: {url: 'url/ant', thumbnail:'',  Display: 'Screwdriver', username: 'Joe'},
 };
 
 var finger_spell = {

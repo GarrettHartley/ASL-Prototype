@@ -461,9 +461,14 @@ h1, h2, h3, h4, h5, h6 {font-family: Century Gothic;}
 	top:10px;
 	height:30px;
 	width:30px;
-	background-color: blue;
 	z-index:2;
 }
+#favoriteVideo img{
+	max-width: 100%;
+	max-height: 100%;
+}
+
+
 
 	/****************************************************
 //          Start Finger Speller Style
@@ -475,12 +480,44 @@ height:500px;
 }
 
 #playCSS:hover{
+	  	cursor: pointer;
 	content:url("Widgets/play_hover.png");
 }
 
 #playCSS:active{
+	  	cursor: pointer;
 	content:url("Widgets/play_active.png");
 }
+
+#pauseCSS:hover{
+	  	cursor: pointer;
+	content:url("widgets/pause_hover.png");
+}
+
+#pauseCSS:active{
+	  	cursor: pointer;
+	content:url("widgets/pause_active.png");
+}
+
+#leftCSS:active{
+	  	cursor: pointer;
+	content:url("widgets/l_arrow_active.png");
+}
+
+#leftCSS:hover{
+	  	cursor: pointer;
+	content:url("widgets/l_arrow_hover.png");
+}
+#rightCSS:hover{
+	  	cursor: pointer;
+	content:url("widgets/r_arrow_hover.png");
+}
+
+#rightCSS:active{
+	  	cursor: pointer;
+	content:url("widgets/r_arrow_active.png");
+}
+
 
 
 #imgContainer{
@@ -542,7 +579,7 @@ list-style-type: none;
 
 #FScontrols ul li a:hover{
 
-  	cursor: pointer;
+
 
 }
 

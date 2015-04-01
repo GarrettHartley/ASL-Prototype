@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ASL 101</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script src="objects.js"></script>
+<script src="vid.js"></script>
+<script>
+//********************
+//    For the LOGIN
+//********************
+
+function create_account() {
+	document.getElementById("login").innerHTML =
+			"<div id='account'>" +
+			"Choose Username:<br>" +
+			"<input type='text' name='user_id' size='30'>"+
+			"<div id='acc' onclick='login()' style='cursor: pointer'>Login</div>"+
+			"Choose Password:<br>"+
+			"<input type='password' name='password' size='30' height='10'>"+
+			"<br><br>"+
+			"Re-enter Password:<br>"+
+			"<input type='password' name='password2' size='30' height='10'>"+
+			"<br><br>"+
+			"<input type='submit' value='Continue' onclick='login()'>"+
+			"</div>";
+
+}
+function login() {
+	document.getElementById("login").innerHTML =
+			"<div id='input'>" +
+			"Username:<br>" +
+			"<input type='text' name='user_id' size='30'><br><br>"+
+			"<div id='acc' onclick='create_account()' style='cursor: pointer'>Create an account</div>"+
+			"Password:<br>"+
+			"<input type='password' name='password' size='30' height='10'>"+
+			"<br><br>"+
+			"<input type='submit' value='Login' onclick='initial_load()'>"+
+			"</div>";
+
+}
+var x = 'user';
+function initial_load() {
+	x = document.getElementById('user_id').value;
+	if(x === "professor" || x === "Professor")
+	{
+		document.getElementById("page_content").innerHTML = "<div class='navigation'>"+
+      	"<ul><li><a href='javascript:;' class='btn' onclick='dictionary()'>Dictionary</a></li>"+
+        "<li><a href='javascript:;' class='btn' onclick='fingerSpeller()'>Finger Speller</a></li>"+
+        "<li><a href='javascript:;' class='btn' onclick='videoPlayback()'>Video Playback</a></li>"+
+        "<li class='btn' ><a href='javascript:;'  onclick='myWords()'>My Words</a></li>"+
+        "<li><a href='javascript:;' class='btn' onclick='viewRequests()'>View Requests</a></li>"+
+        "<li class='btn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login()'></span></li>"+
+    	"</ul></div><br><div class='right_section'><div class='common_content'><p id='main_content_area'></p></div></div>"+
+    	"<div class='clear'></div><div id='footer'><br></div>";
+	}
+	else{
+	document.getElementById("page_content").innerHTML = "<div class='navigation'>"+
+      "<ul><li><a href='javascript:;' class='btn' onclick='dictionary()'>Dictionary</a></li>"+
+        "<li><a href='javascript:;' class='btn' onclick='fingerSpeller()'>Finger Speller</a></li>"+
+        "<li><a href='javascript:;' class='btn' onclick='videoPlayback()'>Video Playback</a></li>"+
+        "<li class='btn' ><a href='javascript:;'  onclick='myWords()'>My Words</a></li>"+
+        "<li><a href='javascript:;' class='btn' onclick='requestWord()'>Request a word</a></li>"+
+        "<li class='btn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login()'></span></li>"+
+    	"</ul></div><br><div class='right_section'><div class='common_content'><p id='main_content_area'></p></div></div>"+
+    	"<div class='clear'></div><div id='footer'><br></div>";
+    	}
+	document.getElementById('user_name').innerHTML = 'Welcome,  ' + current_user;
+    	dictionary();
+
+}
+//************************
+function viewRequests() {
+	var html_string = "<table id='wrds'><tr><th id='wrds'>Word</th><th id='wrds'>Times Requested</th></tr>";
+	for(var wrd in requested_words){
+		html_string += "<tr><td id='wrds'>" + requested_words[wrd]['word'];//Needs to display the words and user who requested them
+		html_string +=  "</td><td id='wrds'>" + requested_words[wrd]['num_requests'] + "</td></tr>";
+	}
+	html_string += "</table>";
+	document.getElementById("main_content_area").innerHTML = html_string;
+
+
+}
+function unit(num){
+console.log("unit number: "+num)
+
+    var html_string = "<ul>";
+   for(var wrd in dict){
+   if(dict[wrd]["unit"]==num){
+    html_string += "<li><button onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\')\">";
+    html_string += dict[wrd]["Display"];
+    html_string += "</button></li>";
+   }
+   }
+    html_string += "</ul>";
+
+  document.getElementById("unit_words").innerHTML = html_string;
+
+}
+
+
+function removeWord(wordID){
+
+    for(var key in user_words) {
+      console.log(key);
+      console.log(wordID.id);
+      if( key == wordID.id){
+         delete user_words[key];
+    }
+  }
+
+  console.log(user_words);
+  wordID.remove();
+
+}
+
+
+function myWords(){
+	var html_string = "<br><ul>";
+	for(var wrd in user_words){
+    if(user_words[wrd]["username"]==current_user){
+	   	html_string += "<br><li id="+wrd+"><div class='myWordsItem' ><button class='wrd_btn' onclick=\"recorder()\">";
+	   	html_string += user_words[wrd]["Display"];
+        html_string += "<button  class='remove' onclick=\"removeWord("+wrd+")\">   Remove Word</button>";
+	   	html_string += "</button>"+"<div class='myWordsImgContainer'   >"+
+       "<img src=\"images\\dual_player.PNG\" style=\"   width:700px;height:500px\"></div></div></li>";
+    }
+  }
+  html_string += "</ul>";
+	document.getElementById("main_content_area").innerHTML = html_string;
+
+}
+
+
+function requestWord(){
+  document.getElementById("main_content_area").innerHTML="<form id='rqst'><h3>Word:</h3><input type=\"text\" name=\"word\"><br>" +
+  "<br><h3>Name:<h3><input type=\"text\" name=\"name\"><br><br><input type=\"submit\" value=\"Submit\"></form>";
+    document.getElementById("left_side_bar").innerHTML = "";
+
+
+}
+
+function favoriteVideo(word){
+   if(!(word in user_words)){
+    user_words.word = {url: 'url/ant', Display: word, username: current_user};
+   }
+}
+
+function videoPlayback(word){
+  // dictionary();
+	console.log("videoPlayback: "+word);
+  html = "";
+  html += "<div id='videoContainer'><div id='favoriteVideo' onclick= favoriteVideo('"+word+"')></div>";
+	html += "<video width=\"400\" controls><source src=\"" + word + ".mp4\" type=\"video/mp4\"></video></div>";
+	html += document.getElementById("video_playback").innerHTML;
+    document.getElementById("dictionary_video").innerHTML= html;
+}
+
+function dictionary(){
+   var html_string = "<div id ='left_side_bar' class='left_side_bar'>"+
+         "<div class='box'>"+
+           "<ul id='units'>"+
+             "<li><button class='btn' onclick='unit(1)'>unit 1</button></li>"+
+             "<li><button class='btn' onclick='unit(2)'>unit 2</button></li>"+
+             "<li><button class='btn' onclick='unit(3)''>unit 3</button></li>"+
+           "</ul>"+
+           "<div id ='unit_words'></div>"+
+         "</div>"+
+       "</div>"+
+   "</div>"
+
+   /*html_string += "<form id='tfnewsearch' method='get' action='http://www.google.com'>"+
+           "<input type='text' class='tftextinput' name='q' size='21' maxlength='120'><input   type='submit' value='search'"+
+           "class='tfbutton'> </form>"+
+           "<div id='dictionary_video'></div>"*/
+					html_string += "<div id='dictionary_video'></div>"
+
+	document.getElementById("main_content_area").innerHTML = html_string;
+  // document.getElementById("main_content_area").innerHTML = left_html_string;
+  unit(1);
+  // video_playback('blue');
+}
+
+function player(){
+  document.getElementById("main_content_area").innerHTML= "<div id = videoConainer><video width=\"400\" controls><source src=\"stubb.mp4\" type=\"video/mp4\"></video></div>"
+
+}
+
+function recorder(){
+  document.getElementById("main_content_area").innerHTML= "<img src=\"images\\dual_player.PNG\" style=\"width:700px;height:500px\">" +
+  "<br><br><button  class=\"btn\" onclick=\"myWords()\">Back</button>"
+
+}
+
+//****************************************************
+//          Start Finger Speller Funcions
+//****************************************************
+
+function fingerSpeller(){
+  document.getElementById("main_content_area").innerHTML= "<div id=' FScontainer'>" +
+    "<div id='imgContainer'>" +
+      "<img id='spellerImage' src='letter_images/A.GIF'>"+
+    "</div>"+
+    "<div id='FScontrols'>"+
+      "<ul>"+
+        "<li id='pause' onclick='pause()' class='btn'><a><div class='buttonContainer'><img id='pausePlay' src='Widgets/pause.png'></div>"+
+          "</a></li>"+
+        "<li id='play' onclick='play()' class='btn' ><a><div class='buttonContainer'><img id ='playCSS' src='Widgets/play.png'></div>"+
+          "</a></li>"+
+        "<li id='slower' class='btn' onclick='slower()' ><a>slower"+
+         "</a></li>"  +
+       "<li id='faster' class='btn' onclick='faster()'><a>faster"+
+          "</a></li> " +
+        "<li id='prev' class='btn' onclick='previous()''><a><div class='buttonContainer'><img src='Widgets/l_arrow.png'></div>"+
+          "</a></li> "+
+        "<li id='next' class='btn' onclick='next()'><a><div class='buttonContainer'><img src='Widgets/r_arrow.png'></div>"+
+          "</a></li> " +
+        "<li ><input id='inputWord' type='text'>" +
+        "</li>" +
+     "</ul>" +
+    "<div>" +
+  "<div>"
+
+    document.getElementById("left_side_bar").innerHTML = "";
+
+
+}
+
+var currentFSWord = "";
+var charIndex = 0;
+var isPaused = false;
+var counter = 0;
+var speed = 1000;
+
+function play(){
+  // if(isPaused == true){
+  //   isPaused = false;
+  // }
+  // else{
+  //   isPaused = true;
+  // }
+
+    currentFSWord = document.getElementById('inputWord').value;
+    var timer = setInterval(function () {
+        console.log("turn no. " + charIndex);
+        if (isPaused==true) {
+          isPaused = false;
+            clearInterval(timer);
+        }
+
+        display();
+      console.log(charIndex);
+      if (charIndex >= currentFSWord.length-1) {
+          charIndex = 0;
+          clearInterval(timer);
+          return;
+        }
+        charIndex++;
+
+    }, speed);
+
+}
+
+function pause(){
+  isPaused = true;
+}
+
+function slower(){
+  if(speed<2000){
+    speed+=200;
+  }
+}
+
+function faster(){
+  if(speed>200){
+    speed-=200;
+  }
+}
+
+
+function next(){
+  if(charIndex<currentFSWord.length-1){
+    charIndex++;
+    display();
+  }
+}
+
+function previous(){
+  if(charIndex>0){
+    charIndex--;
+    display();
+  }
+}
+
+function display(){
+
+  setTimeout(function() {
+        document.getElementById("imgContainer").style.borderColor = "black";
+}, 400);
+document.getElementById("imgContainer").style.borderColor = "#3498db";
+  document.getElementById('spellerImage').src = "letter_images/"+currentFSWord.charAt(charIndex).toUpperCase()+".GIF"
+}
+
+//****************************************************
+//          End Finger Speller Funcions
+//****************************************************
+
+</script>
+</head>
+<body>
+
+<div id="wrapper">
+
+  <div id="header">
+
+    <div class="top_banner">
+      <img src="UpdatedLogo.png">
+    </div>
+
+  </div>
+
+  <div id="page_content">
+    <div class='navigation'>
+      <ul><li><a href='javascript:;' class='btn' onclick='dictionary()'>Dictionary</a></li>
+        <li><a href='javascript:;' class='btn' onclick='fingerSpeller()'>Finger Speller</a></li>
+        <li class='btn' ><a href='javascript:;'  onclick='myWords()'>My Words</a></li>
+        <li><a href='javascript:;' class='btn' onclick='requestWord()'>Request a word</a></li>
+        <li class='btn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login()'></span></li>
+        <li  style='float: right; color: yellow; font-family: Century Gothic; padding-right: 10px'><span>Welcome, Joe!</span></li>
+      </ul></div><br><div class='right_section'><div class='common_content'>
+        <p id='main_content_area'>
+          <script>
+          dictionary();
+          </script>
+
+<!--           <div id ='left_side_bar' class='left_side_bar'>
+          <div class='box'>
+           <ul id='units'>
+             <li><button class='btn' onclick='unit(1)'>unit 1</button></li>
+             <li><button class='btn' onclick='unit(2)'>unit 2</button></li>
+             <li><button class='btn' onclick='unit(3)'>unit 3</button></li>
+           </ul>
+           <div id ='unit_words'></div>
+            </div>
+            </div>
+            </div>
+
+
+    <div id='dictionary_video'></div>
+ -->
+ 
+        </p></div></div>
+      <div class='clear'></div><div id='footer'><br></div>
+  </div>
+
+</div>
+
+***************************************
+This hidden div is needed for the playback functionality
+DO NOT REMOVE OR EDIT
+***************************************
+<div id="video_playback" hidden="true">
+  <video id="video" width="680" height="400" autoplay></video>
+  <canvas id="canvas" width="680" height="400"></canvas>
+</div>
+
+</body></html>

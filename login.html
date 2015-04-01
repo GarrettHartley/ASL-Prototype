@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ASL 101</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script src="objects.js"></script>
+<script>
+	function check(form) {
+        user = form.user_id.value;
+        window.open('index.html'); //I can't get this to open in the same window. I tried "_self" but it won't work
+    }
+
+	function create_account() {
+		document.getElementById("login").innerHTML = 
+				"<form id='account'>" +
+				"Choose Username:<br>" +
+				"<input type='text' name='user_id' size='30'>"+
+				"<div id='acc' onclick='login()' style='cursor: pointer'>Login</div>"+
+				"Choose Password:<br>"+
+				"<input type='password' name='password' size='30' height='10'>"+
+				"<br><br>"+
+				"Re-enter Password:<br>"+
+				"<input type='password' name='password2' size='30' height='10'>"+
+				"<br><br>"+
+				"<input type='submit' value='Continue' onclick='login()'>"+
+				"</form>";
+	}
+	function login() {
+		document.getElementById("login").innerHTML = 
+				"<form id='input'>" +
+				"Username:<br>" +
+				"<input type='text' name='user_id' size='30'><br><br>"+
+				"Password:<br>"+
+				"<input type='password' name='password' size='30' height='10'>"+
+				"<br><br>"+
+				"<input type='submit' value='Login' onclick='check(this.form)'>"+
+				"</form>";
+	}
+</script>
+</head>
+<body>
+
+<div id="wrapper">
+
+  <div id="header" style="margin: 0px">
+
+    <div class="top_banner"> 
+      <img src="NewLogo.png">
+  </div>
+
+  </div>
+
+  <div id="page_content">
+
+<br>
+      <div class="common_content">
+        <div id="main_content_area">
+        	<div id="image"> 
+        		<div id="login">
+        			<form id="input">
+					Username:<br>
+					<input type="text" name="user_id" size="30" >
+					<div id="acc" onclick="create_account()" style='cursor: pointer'>Create an account</div>
+					Password:<br>
+					<input type="password" name="password" size="30" height="10">
+					<br><br>
+					<input type="submit" value="Login" onclick="check(this.form)">
+					</form>
+				</div>
+        	</div>
+        </div>
+   
+    </div>
+    
+    <div class="clear"></div>
+
+    <!--start footer from here-->
+    <div id="footer"><br>
+  </div>
+
+</div>
+
+</body></html>

@@ -318,7 +318,7 @@ display:block;
 
 
 .left_side_bar  .box{
-	width:100px;
+	width:200px;
 	height: 337px;
 	padding:10px 15px 5px;
 	border:#A1A9AB solid 2px;
@@ -348,6 +348,41 @@ display:block;
 	color:#364b38;
 	text-decoration:none;
 }
+
+li.units {
+	width: 100px;
+	height: 50px;
+}
+
+div.btn {
+	vertical-align: middle;
+	text-align: center;
+	height: 49px;
+	background-color: #E6E6E6;
+	border-bottom: 1px dotted gray;
+	color: #3498db;
+	font-size: 20px;
+	line-height: 45px;
+}
+div.btn:hover {background-color: #EDEDED;}
+div.btn:active {background-color: #FEFEFE;}
+button.unit_word {
+	width: 200px;
+	height: 50px;
+	font-family: Century Gothic;
+	color: #3498db;
+	}
+	
+button#unit_word {
+	width: 58px;
+	background-color: #EDEDED;
+	border: 1px solid #EDEDED;
+	height: 28px;
+	margin-left: 6px;
+	margin-top: 6px;
+}	
+button#unit_word:hover {background-color: #FEFEFE;}
+
 /*----end page content----*/
 
 
@@ -765,7 +800,7 @@ End MyWords content
 
 
 form#rqst {
-	margin-left: 25em;
+	margin-left: 31em;
 	margin-top: 5em;
 	margin-bottom: 5em;
 	border: 1px solid #cccccc;

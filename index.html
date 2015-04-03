@@ -131,11 +131,10 @@ function myWords(){
 	var html_string = "<br><ul class='myList'>";
 	for(var wrd in user_words){
     if(user_words[wrd]["username"]==current_user){
-	   	html_string += "<li id="+wrd+" class='mywords_list'><div class='myWordsItem' ><div class='wrd_btn' onclick=\"recorder()\">";
+	   	html_string += "<li id="+wrd+" class='mywords_list'><div class='myWordsItem' ><div class='wrd_btn'>";
 	   	html_string += user_words[wrd]["Display"];
-        html_string += "<button  class='remove' onclick=\"removeWord("+wrd+")\">X</button>";
-	   	html_string += "</div>"+"<div class='myWordsImgContainer'   >"+
-       "<img src=\"images\\dual_player.PNG\" style=\"   width:700px;height:500px\"></div></div></li>";
+	   	html_string += "</div>"+"<button  class='remove' onclick=\"removeWord("+wrd+")\">X</button>"+"<div class='myWordsImgContainer'   >"+
+       "<img src=\"teacher_vids/"+ wrd +".jpg\" style=\"   width:700px;height:500px\"  onclick=\"recorder()\"></div></div></li>";
     }
   }
   html_string += "</ul>";

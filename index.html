@@ -178,8 +178,7 @@ function videoPlayback(word){
   else{
      html+="<img id='star' src='Widgets/star.png'></div>";
   }
-
-	html += "<video width=\"400\" controls><source src=\"" + word + ".mp4\" type=\"video/mp4\"></video></div>";
+	html += "<video width=\"400\" controls><source src=\"" word + ".mp4\" type=\"video/mp4\"></video></div>";
 	html += document.getElementById("video_playback").innerHTML;
     document.getElementById("dictionary_video").innerHTML= html;
 }

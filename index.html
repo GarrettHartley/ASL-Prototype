@@ -27,6 +27,17 @@ function create_account() {
 			"</div>";
 
 }
+
+function selectTab(){
+
+  var prevtab = document.querySelectorAll(".navbtn.selected");
+  console.log(prevtab[0].className)
+  prevtab[0].className = prevtab[0].className.replace("navbtn selected", "navbtn");
+  event.target.className = "navbtn selected"
+
+
+}
+
 function login() {
 	document.getElementById("login").innerHTML =
 			"<div id='input'>" +
@@ -46,23 +57,23 @@ function initial_load() {
 	if(x === "professor" || x === "Professor")
 	{
 		document.getElementById("page_content").innerHTML = "<div class='navigation'>"+
-      	"<ul><li><a href='javascript:;' class='btn' onclick='dictionary()'>Dictionary</a></li>"+
-        "<li><a href='javascript:;' class='btn' onclick='fingerSpeller()'>Finger Speller</a></li>"+
-        "<li><a href='javascript:;' class='btn' onclick='videoPlayback()'>Video Playback</a></li>"+
-        "<li class='btn' ><a href='javascript:;'  onclick='myWords()'>My Words</a></li>"+
-        "<li><a href='javascript:;' class='btn' onclick='viewRequests()'>View Requests</a></li>"+
-        "<li class='btn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login()'></span></li>"+
+      	"<ul><li><a href='javascript:;' class='navbtn' onclick='dictionary();selectTab()'>Dictionary</a></li>"+
+        "<li><a href='javascript:;' class='navbtn' onclick='fingerSpeller();selectTab()'>Finger Speller</a></li>"+
+        "<li><a href='javascript:;' class='navbtn' onclick='videoPlayback();selectTab()'>Video Playback</a></li>"+
+        "<li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab()'>My Words</a></li>"+
+        "<li><a href='javascript:;' class='navbtn' onclick='viewRequests();selectTab()'>View Requests</a></li>"+
+        "<li class='navbtn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login();selectTab()'></span></li>"+
     	"</ul></div><br><div class='right_section'><div class='common_content'><p id='main_content_area'></p></div></div>"+
     	"<div class='clear'></div><div id='footer'><br></div>";
 	}
 	else{
 	document.getElementById("page_content").innerHTML = "<div class='navigation'>"+
-      "<ul><li><a href='javascript:;' class='btn' onclick='dictionary()'>Dictionary</a></li>"+
-        "<li><a href='javascript:;' class='btn' onclick='fingerSpeller()'>Finger Speller</a></li>"+
-        "<li><a href='javascript:;' class='btn' onclick='videoPlayback()'>Video Playback</a></li>"+
-        "<li class='btn' ><a href='javascript:;'  onclick='myWords()'>My Words</a></li>"+
-        "<li><a href='javascript:;' class='btn' onclick='requestWord()'>Request a word</a></li>"+
-        "<li class='btn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login()'></span></li>"+
+      "<ul><li><a href='javascript:;' class='navbtn' onclick='dictionary();selectTab()'>Dictionary</a></li>"+
+        "<li><a href='javascript:;' class='navbtn' onclick='fingerSpeller();selectTab()'>Finger Speller</a></li>"+
+        "<li><a href='javascript:;' class='navbtn' onclick='videoPlayback();selectTab()'>Video Playback</a></li>"+
+        "<li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab()'>My Words</a></li>"+
+        "<li><a href='javascript:;' class='navbtn' onclick='requestWord();selectTab()'>Request a word</a></li>"+
+        "<li class='navbtn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login();selectTab()'></span></li>"+
     	"</ul></div><br><div class='right_section'><div class='common_content'><p id='main_content_area'></p></div></div>"+
     	"<div class='clear'></div><div id='footer'><br></div>";
     	}
@@ -136,7 +147,7 @@ function myWords(){
 function requestWord(){
   document.getElementById("main_content_area").innerHTML="<form id='rqst'><h3>Word:</h3><input type=\"text\" name=\"word\"><br>" +
   "<br><h3>Name:<h3><input type=\"text\" name=\"name\"><br><br><input type=\"submit\" value=\"Submit\"></form>";
-    document.getElementById("left_side_bar").innerHTML = "";
+    // document.getElementById("left_side_bar").innerHTML = "";
 
 
 }
@@ -147,6 +158,11 @@ function favoriteVideo(word){
     console.log(word);
     document.querySelector('#star').src = 'Widgets/star_clicked.png';
     user_words[word] = {url: 'url/ant', Display: word, username: current_user};
+   }
+   else{
+    document.querySelector('#star').src = 'Widgets/star.png';
+    delete user_words[word]
+    console.log(word);
    }
 }
 
@@ -190,7 +206,7 @@ function dictionary(){
 	document.getElementById("main_content_area").innerHTML = html_string;
   // document.getElementById("main_content_area").innerHTML = left_html_string;
   unit(1);
-  videoPlayback(dict['Blue']["Display"]);
+  videoPlayback(dict['Salt']["Display"]);
 }
 
 function player(){
@@ -233,7 +249,7 @@ function fingerSpeller(){
     "<div>" +
   "<div>"
 
-    document.getElementById("left_side_bar").innerHTML = "";
+    // document.getElementById("left_side_bar").innerHTML = "";
 
 
 }
@@ -333,11 +349,11 @@ document.getElementById("imgContainer").style.borderColor = "#3498db";
 
   <div id="page_content">
     <div class='navigation'>
-      <ul><li><a href='javascript:;' class='btn' onclick='dictionary()'>Dictionary</a></li>
-        <li><a href='javascript:;' class='btn' onclick='fingerSpeller()'>Finger Speller</a></li>
-        <li class='btn' ><a href='javascript:;'  onclick='myWords()'>My Words</a></li>
-        <li><a href='javascript:;' class='btn' onclick='requestWord()'>Request a word</a></li>
-        <li class='btn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login()'></span></li>
+      <ul><li><a href='javascript:;' class='navbtn selected' onclick='dictionary();selectTab()'>Dictionary</a></li>
+        <li><a href='javascript:;' class='navbtn' onclick='fingerSpeller();selectTab()'>Finger Speller</a></li>
+        <li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab()'>My Words</a></li>
+        <li><a href='javascript:;' class='navbtn' onclick='requestWord();selectTab()'>Request a word</a></li>
+        <li class='navbtn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login();selectTab()'></span></li>
         <li  style='float: right; color: yellow; font-family: Century Gothic; padding-right: 10px'><span>Welcome, Joe!</span></li>
       </ul></div><br><div class='right_section'><div class='common_content'>
         <p id='main_content_area'>

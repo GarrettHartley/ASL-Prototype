@@ -208,6 +208,12 @@ display:block;
 
 }
 
+.selected{
+	background-color: white;
+	color:blue !important;
+	border: 1px solid blue;
+}
+
 
 
 .navigation a{

@@ -155,30 +155,6 @@ display:block;
 
 
 
-/*#header h1{
-	font-size:32px;
-	color:#000000;
-	margin:0px;
-	font-family:Georgia, "Times New Roman", Times, serif;
-	font-weight:bold;
-	padding:0px 0px 10px;
-}
-
-#header h1 a {
-	color:#000000;
-	text-decoration: none;
-}
-
-#header h1 a:hover {
-	text-decoration: none;
-}
-
-#header p{
-	font-size:16px;
-	margin-left:1px;
-	color:#000000;
-	font-family:Georgia, "Times New Roman", Times, serif;
-}*/
 
 .navigation{
 	background: #3498db;
@@ -209,17 +185,23 @@ display:block;
 }
 
 .selected{
-	background-color: white;
-	color:blue !important;
-	border: 1px solid blue;
+	background-image: linear-gradient(to bottom, #3498db, #2980b9);
+	color: white !important;
+	border-left: 2px dotted white;
+	border-right: 2px dotted white;
 }
 
 
 
 .navigation a{
 	display:block;
+	color: #E0E0E0;
 	height: 34px;
 	width:163px;
+}
+
+.navigation a.selected {
+	width: 159px !important;
 }
 
 .navigation li{
@@ -284,8 +266,13 @@ display:block;
 */	margin-bottom:20px;
 }
 
+#main_content_area {
+	width: 1110px;
+}
+
 .common_content{
 	padding:0 0 0 0;
+	width: 1110px;
 }
 
 .border_left{
@@ -725,17 +712,18 @@ Start MyWords content
 Start MyWords content
 **************************/
 .myWordsItem{
-	height:100px;
-	width:600px;
-	margin-left:200px;
-	background-color: white;
-	box-shadow: 3px 3px 10px #888888;
+	height:200px;
+	width:200px;
+	background-color: #ADDEFE;
+	box-shadow: 2px 2px 5px #888888;
 }
 
 .mywords_list {
-
+	width: 200px;
+	float: left;
+	display: block;
+	margin: 10px;
 }
-
 
 .myWordsImgContainer{
 	float:right;
@@ -743,23 +731,30 @@ Start MyWords content
 	width:70px;
 }
 
+.myList {
+	padding-left: 70px;
+	padding-right: 70px;
+}
+
 .wrd_btn {
 	width: 80px;
-	height: 80px;
+	height: 30px;
 	font-family: Century Gothic;
 	color: white;
 	font-size: 20px;
 	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
 	margin: 10px;
+	display: block;
 	cursor: pointer;
 }
 .remove {
-	width: 160px;
+	width: 30px;
 	height: 30px;
-	margin: 35px 20px;
 	font-family: Century Gothic;
-	font-size: 14px;
-	color: #3498db;
+	font-size: 20px;
+	color: gray;
+	float: right;
+	font-weight: 900;
 	background-color: white;
 	border: 2px solid #ccc;
 	border-radius: 8px;
@@ -778,9 +773,6 @@ Start MyWords content
 	width: 80px;
 }
 
-.myWordsItem button{
-float:left;
-}
 
 #faster:hover, #slower:hover{
 		text-decoration:underline;

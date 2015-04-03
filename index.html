@@ -128,13 +128,13 @@ function removeWord(wordID){
 
 
 function myWords(){
-	var html_string = "<br><ul>";
+	var html_string = "<br><ul class='myList'>";
 	for(var wrd in user_words){
     if(user_words[wrd]["username"]==current_user){
-	   	html_string += "<li id="+wrd+" class='mywords_list' style='margin-bottom: 15px'><div class='myWordsItem' ><button class='wrd_btn' onclick=\"recorder()\">";
+	   	html_string += "<li id="+wrd+" class='mywords_list'><div class='myWordsItem' ><div class='wrd_btn' onclick=\"recorder()\">";
 	   	html_string += user_words[wrd]["Display"];
-        html_string += "<button  class='remove' onclick=\"removeWord("+wrd+")\">   Remove Word</button>";
-	   	html_string += "</button>"+"<div class='myWordsImgContainer'   >"+
+        html_string += "<button  class='remove' onclick=\"removeWord("+wrd+")\">X</button>";
+	   	html_string += "</div>"+"<div class='myWordsImgContainer'   >"+
        "<img src=\"images\\dual_player.PNG\" style=\"   width:700px;height:500px\"></div></div></li>";
     }
   }

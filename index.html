@@ -154,7 +154,6 @@ function unit(num){
 
 
 function removeWord(wordID){
-
     for(var key in user_words) {
       console.log(key);
       console.log(wordID.id);
@@ -165,18 +164,14 @@ function removeWord(wordID){
 
   console.log(user_words);
   wordID.remove();
+  if(i == 0)
+{
+var html_string = "<p style='text-align: center; color: black; font-size: 20px; font-family: Century Gothic'>No current favorited videos</p>";
+document.getElementById("main_content_area").innerHTML = html_string;
+}
 
 }
 
-function lookup(){
-  var word = document.getElementById("search_input").value
-    console.log(dict[word]);
-    if(dict[word].Display.toLowerCase()){
-      videoPlayback(word)
-    } else {
-      requestWord()
-    }
-}
 
 function myWords(){
 	var html_string = "<br><ul class='myList'>";
@@ -202,7 +197,7 @@ function myWords(){
 
 
 function requestWord(){
-  document.getElementById("main_content_area").innerHTML="<form id='rqst'><h3>Word:</h3><input type=\"text\" name=\"word\"><br>" +
+  document.getElementById("main_content_area").innerHTML="<br><form id='rqst'><h3>Word:</h3><input type=\"text\" name=\"word\"><br>" +
   "<br><h3>Name:<h3><input type=\"text\" name=\"name\"><br><br><input type=\"submit\" value=\"Submit\"></form>";
     // document.getElementById("left_side_bar").innerHTML = "";
 
@@ -252,9 +247,11 @@ function dictionary(){
    var html_string = "<div id ='left_side_bar' class='left_side_bar'>"+
          "<div class='box'>"+
            "<ul id='units'>"+
+
              "<li><button class='unitbtn selected' onclick='unit(1)'>unit 1</button><div id ='unit1_words'></div></li>"+
              "<li><button class='unitbtn' onclick='unit(2)'>unit 2</button><div id ='unit2_words'></div></li>"+
              "<li><button class='unitbtn' onclick='unit(3)''>unit 3</button><div id ='unit3_words'></div></li>"+
+
            "</ul>"+
          "</div>"+
        "</div>"+
@@ -264,8 +261,10 @@ function dictionary(){
            "<input type='text' class='tftextinput' name='q' size='21' maxlength='120'><input   type='submit' value='search'"+
            "class='tfbutton'> </form>"+
            "<div id='dictionary_video'></div>"*/
+
            html_string+="<div id='searchContainer'><input type='text' id='search_input'>"+
           "<div id='findContainer'><button type='button' onclick='lookup()'>Find</button></div> </div>"
+
 					html_string += "<div id='dictionary_video'></div>"
 
 	document.getElementById("main_content_area").innerHTML = html_string;

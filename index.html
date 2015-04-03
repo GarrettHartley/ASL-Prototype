@@ -138,16 +138,22 @@ function lookup(){
 
 function myWords(){
 	var html_string = "<br><ul class='myList'>";
+	var i = 0;
 	for(var wrd in user_words){
+	i++;
     if(user_words[wrd]["username"]==current_user){
-	   	html_string += "<li id="+wrd+" class='mywords_list'><div class='myWordsItem' ><div class='wrd_btn' onclick=\"recorder()\">";
+	   	html_string += "<li id="+wrd+" class='mywords_list'><div class='myWordsItem' ><div class='wrd_btn'>";
 	   	html_string += user_words[wrd]["Display"];
-        html_string += "<button  class='remove' onclick=\"removeWord("+wrd+")\">X</button>";
-	   	html_string += "</div>"+"<div class='myWordsImgContainer'   >"+
-       "<img src=\"images\\dual_player.PNG\" style=\"   width:700px;height:500px\"></div></div></li>";
+	   	html_string += "</div>"+"<button  class='remove' onclick=\"removeWord("+wrd+")\">X</button>"+"<div class='myWordsImgContainer'   >"+
+       "<img src=\"teacher_vids/"+ wrd +".jpg\" style=\"   width:700px;height:500px\"  onclick=\"recorder()\"></div></div></li>";
     }
   }
-  html_string += "</ul>";
+	html_string += "</ul>";
+  if(i == 0)
+  {
+  	html_string = "<p style='text-align: center; color: black; font-size: 20px; font-family: Century Gothic'>No current favorited videos</p>";
+  }
+ 
 	document.getElementById("main_content_area").innerHTML = html_string;
 
 }

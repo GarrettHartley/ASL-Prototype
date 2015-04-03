@@ -9,13 +9,7 @@ var dict = {
 var current_user = 'Joe';
 var logged_in = false;
 
-var user_words = {
-	Salt: {url:'url/Bug', thumbnail:'', Display: 'Salt', username: 'Joe'},
-	Salad: {url:'url/cat', thumbnail:'',  Display: 'Salad', username: 'Joe'},
-	Saint: {url: 'url/ant', thumbnail:'',  Display: 'Saint', username: 'Joe'},
-	Simple: {url: 'url/ant', thumbnail:'',  Display: 'Simple', username: 'Joe'},
-	Screwdriver: {url: 'url/ant', thumbnail:'',  Display: 'Screwdriver', username: 'Joe'},
-};
+var user_words = {};
 
 var finger_spell = {
 	A: '/letter_images/A.GIF',

@@ -322,6 +322,10 @@ function previous(){
   }
 }
 
+window.onload = function() {
+  dictionary();
+};
+
 function display(){
 
   setTimeout(function() {
@@ -359,9 +363,7 @@ document.getElementById("imgContainer").style.borderColor = "#3498db";
         <li  style='float: right; color: yellow; font-family: Century Gothic; padding-right: 10px'><span>Welcome, Joe!</span></li>
       </ul></div><br><div class='right_section'><div class='common_content'>
         <p id='main_content_area'>
-          <script>
-          dictionary();
-          </script>
+
 
 <!--           <div id ='left_side_bar' class='left_side_bar'>
           <div class='box'>

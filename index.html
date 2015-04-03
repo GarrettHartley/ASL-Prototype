@@ -28,14 +28,51 @@ function create_account() {
 
 }
 
+
+
 function selectTab(){
 
   var prevtab = document.querySelectorAll(".navbtn.selected");
-  console.log(prevtab[0].className)
   prevtab[0].className = prevtab[0].className.replace("navbtn selected", "navbtn");
   event.target.className = "navbtn selected"
 
 
+}
+
+initalWordSelect = "true";
+function selectWord(){
+  console.log(document.querySelector(".wordbtn.selected"))
+  if(document.querySelector(".wordbtn.selected")==null){
+    document.querySelector(".wordbtn").className="wordbtn selected"
+  }
+  else{
+    document.querySelector(".wordbtn.selected").className="wordbtn"
+    event.target.className="wordbtn selected"
+  }
+  // if(initalWordSelect=="false"){
+  // var prevWord = document.querySelectorAll(".wordbtn.selected");
+  // prevWord[0].className = prevWord[0].className.replace("wordbtn selected","wordbtn");
+  // event.target.className = "wordbtn selected"
+  //     }
+  // else{
+  //   document.querySelector(".wordbtn").className="wordbtn selected"
+  //   initalWordSelect = "false";
+  // }
+}
+
+
+initialUnitSelect = "true";   
+function selectUnit(){
+
+  if(initialUnitSelect=="false"){
+  var prevUnit = document.querySelectorAll(".unitbtn.selected");
+  prevUnit[0].className = prevUnit[0].className.replace("unitbtn selected", "unitbtn");
+  event.target.className = "unitbtn selected"
+  // selectWord();
+    }
+  else{
+    initialUnitSelect = "false";
+  }
 }
 
 function login() {
@@ -94,19 +131,24 @@ function viewRequests() {
 
 }
 function unit(num){
-console.log("unit number: "+num)
+  selectUnit();
+  console.log("unit number: "+num)
+  document.getElementById("unit1_words").innerHTML="";
+  document.getElementById("unit2_words").innerHTML="";
+  document.getElementById("unit3_words").innerHTML="";
 
-    var html_string = "<ul>";
+
+  var html_string = "<ul>";
    for(var wrd in dict){
    if(dict[wrd]["unit"]==num){
-    html_string += "<li><button onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\')\">";
+    html_string += "<li><button class='wordbtn' onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\')\">";
     html_string += dict[wrd]["Display"];
     html_string += "</button></li>";
    }
    }
     html_string += "</ul>";
 
-  document.getElementById("unit_words").innerHTML = html_string;
+  document.getElementById("unit"+num+"_words").innerHTML = html_string;
 
 }
 
@@ -181,8 +223,13 @@ function favoriteVideo(word){
    }
 }
 
+
+
 function videoPlayback(word){
   // dictionary();
+
+  selectWord();
+
 	console.log("videoPlayback: "+word);
   html = "";
   html += "<div id='videoContainer'><div id='favoriteVideo' onclick= favoriteVideo('"+word+"')>";
@@ -205,11 +252,10 @@ function dictionary(){
    var html_string = "<div id ='left_side_bar' class='left_side_bar'>"+
          "<div class='box'>"+
            "<ul id='units'>"+
-             "<li><button class='unitbtn' onclick='unit(1)'>unit 1</button></li>"+
-             "<li><button class='unitbtn' onclick='unit(2)'>unit 2</button></li>"+
-             "<li><button class='unitbtn' onclick='unit(3)''>unit 3</button></li>"+
+             "<li><button class='unitbtn selected' onclick='unit(1)'>unit 1</button><div id ='unit1_words'></div></li>"+
+             "<li><button class='unitbtn' onclick='unit(2)'>unit 2</button><div id ='unit2_words'></div></li>"+
+             "<li><button class='unitbtn' onclick='unit(3)''>unit 3</button><div id ='unit3_words'></div></li>"+
            "</ul>"+
-           "<div id ='unit_words'></div>"+
          "</div>"+
        "</div>"+
    "</div>"
@@ -218,8 +264,8 @@ function dictionary(){
            "<input type='text' class='tftextinput' name='q' size='21' maxlength='120'><input   type='submit' value='search'"+
            "class='tfbutton'> </form>"+
            "<div id='dictionary_video'></div>"*/
-           html_string+="<input type='text' id='search_input'>"+
-          "<button type='button' onclick='lookup()'>Find</button> "
+           html_string+="<div id='searchContainer'><input type='text' id='search_input'>"+
+          "<div id='findContainer'><button type='button' onclick='lookup()'>Find</button></div> </div>"
 					html_string += "<div id='dictionary_video'></div>"
 
 	document.getElementById("main_content_area").innerHTML = html_string;
@@ -340,6 +386,7 @@ function previous(){
 }
 
 window.onload = function() {
+
   dictionary();
 };
 

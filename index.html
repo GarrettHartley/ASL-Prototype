@@ -112,7 +112,6 @@ console.log("unit number: "+num)
 
 
 function removeWord(wordID){
-
     for(var key in user_words) {
       console.log(key);
       console.log(wordID.id);
@@ -123,18 +122,14 @@ function removeWord(wordID){
 
   console.log(user_words);
   wordID.remove();
+  if(i == 0)
+{
+var html_string = "<p style='text-align: center; color: black; font-size: 20px; font-family: Century Gothic'>No current favorited videos</p>";
+document.getElementById("main_content_area").innerHTML = html_string;
+}
 
 }
 
-function lookup(){
-  var word = document.getElementById("search_input").value
-    console.log(dict[word]);
-    if(dict[word].Display.toLowerCase()){
-      videoPlayback(word)
-    } else {
-      requestWord()
-    }
-}
 
 function myWords(){
 	var html_string = "<br><ul class='myList'>";
@@ -205,9 +200,9 @@ function dictionary(){
    var html_string = "<div id ='left_side_bar' class='left_side_bar'>"+
          "<div class='box'>"+
            "<ul id='units'>"+
-             "<li><button class='unitbtn' onclick='unit(1)'>unit 1</button></li>"+
-             "<li><button class='unitbtn' onclick='unit(2)'>unit 2</button></li>"+
-             "<li><button class='unitbtn' onclick='unit(3)''>unit 3</button></li>"+
+             "<li><button class='btn' onclick='unit(1)'>unit 1</button></li>"+
+             "<li><button class='btn' onclick='unit(2)'>unit 2</button></li>"+
+             "<li><button class='btn' onclick='unit(3)''>unit 3</button></li>"+
            "</ul>"+
            "<div id ='unit_words'></div>"+
          "</div>"+
@@ -218,8 +213,6 @@ function dictionary(){
            "<input type='text' class='tftextinput' name='q' size='21' maxlength='120'><input   type='submit' value='search'"+
            "class='tfbutton'> </form>"+
            "<div id='dictionary_video'></div>"*/
-           html_string+="<input type='text' id='search_input'>"+
-          "<button type='button' onclick='lookup()'>Find</button> "
 					html_string += "<div id='dictionary_video'></div>"
 
 	document.getElementById("main_content_area").innerHTML = html_string;

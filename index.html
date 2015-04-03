@@ -179,7 +179,9 @@ function videoPlayback(word){
      html+="<img id='star' src='Widgets/star.png'></div>";
   }
 
-	html += "<video width=\"400\" controls><source src=\"" + word + ".mp4\" type=\"video/mp4\"></video></div>";
+
+	html += "<video width=\"400\" controls><source src=\"" + dict[word]["url"] + ".mp4\" type=\"video/mp4\"></video></div>";
+
 	html += document.getElementById("video_playback").innerHTML;
     document.getElementById("dictionary_video").innerHTML= html;
 }
@@ -320,6 +322,10 @@ function previous(){
   }
 }
 
+window.onload = function() {
+  dictionary();
+};
+
 function display(){
 
   setTimeout(function() {
@@ -357,9 +363,7 @@ document.getElementById("imgContainer").style.borderColor = "#3498db";
         <li  style='float: right; color: yellow; font-family: Century Gothic; padding-right: 10px'><span>Welcome, Joe!</span></li>
       </ul></div><br><div class='right_section'><div class='common_content'>
         <p id='main_content_area'>
-          <script>
-          dictionary();
-          </script>
+
 
 <!--           <div id ='left_side_bar' class='left_side_bar'>
           <div class='box'>
@@ -376,7 +380,7 @@ document.getElementById("imgContainer").style.borderColor = "#3498db";
 
     <div id='dictionary_video'></div>
  -->
- 
+
         </p></div></div>
       <div class='clear'></div><div id='footer'><br></div>
   </div>

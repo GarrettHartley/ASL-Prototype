@@ -25,13 +25,14 @@ function create_account() {
 			"<br><br>"+
 			"<input type='submit' value='Continue' onclick='login()'>"+
 			"</div>";
-
 }
 
 function lookup(){
   var word = document.getElementById("search_input").value
   if(dict[word]){
     videoPlayback(word)
+    unit(dict[word].unit)
+    console.log("Inside lookup"+dict[word].unit)
   } else {
     requestWord()
   }
@@ -40,6 +41,7 @@ function lookup(){
 
 function selectTab(){
 
+  console.log("eventTarget"+event.target);
   var prevtab = document.querySelectorAll(".navbtn.selected");
   prevtab[0].className = prevtab[0].className.replace("navbtn selected", "navbtn");
   event.target.className = "navbtn selected"
@@ -47,22 +49,27 @@ function selectTab(){
 
 }
 function selectWord(){
-console.log("Iwas just selected" +event.target.getAttribute('id'));
-  console.log(document.querySelector(".wordbtn.selected"))
+  console.log("hahahhahahahha"+event.target.className)
+  if(event.target.className!='find'){
     document.querySelector(".wordbtn.selected").className="wordbtn"
     event.target.className="wordbtn selected"
-  console.log("insie selctedword");
-  console.log("This is the selected word: "+document.querySelector(".wordbtn.selected").getAttribute('id'))
-
+  }
+  else{
+    console.log('ahahhasdfasdfasdfasfd');
+  }
 }
 
 function selectUnit(){
   // initialWordSelect='true';
   if(initialUnitSelect=="false"){
-  var prevUnit = document.querySelectorAll(".unitbtn.selected");
-  prevUnit[0].className = prevUnit[0].className.replace("unitbtn selected", "unitbtn");
-  event.target.className = "unitbtn selected"
-  // selectWord();
+     var prevUnit = document.querySelectorAll(".unitbtn.selected");
+      prevUnit[0].className = prevUnit[0].className.replace("unitbtn selected", "unitbtn");
+        if(event.target.className!='find'){
+        event.target.className = "unitbtn selected"
+        }
+        else{
+          selectWord()
+        }
     }
   else{
     initialUnitSelect = "false";
@@ -132,7 +139,7 @@ function unit(num){
   document.getElementById("unit3_words").innerHTML="";
 
 
-  var html_string = "<ul>";
+  var html_string = "<ul id='unitWords>'";
    for(var wrd in dict){
    if(dict[wrd]["unit"]==num){
     html_string += "<li><button id='"+dict[wrd]["Display"]+"' class='wordbtn' onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\');selectWord()\">";
@@ -269,7 +276,7 @@ function dictionary(){
            "<div id='dictionary_video'></div>"*/
 
            html_string+="<div id='searchContainer'><input type='text' id='search_input'>"+
-          "<div id='findContainer'><button type='button' onclick='lookup()'>Find</button></div> </div>"
+          "<div id='findContainer'><button type='button' class ='find' onclick='lookup()'>Find</button></div> </div>"
 
 					html_string += "<div id='dictionary_video'></div>"
 

@@ -200,9 +200,7 @@ navigation .selected{
 	width:163px;
 }
 
-.find{
 
-}
 
 .navigation a.selected {
 	width: 159px !important;
@@ -392,10 +390,27 @@ outline:none;
 	height:30px;
 }
 #search_input{
-	width: 350px;
+	width: 330px;
+	height:28px;
+	float: left;
 }
 #findContainer{
 float: right;
+}
+#find {
+	color: white;
+	float: left;
+	display: block;
+	font-family: Century Gothic;
+	background-image: linear-gradient(to bottom, #3498db, #2980b9);
+	height: 30px;
+	width: 63px;
+	text-align: center;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	line-height: 30px;
+	font-size: 20px;
+	cursor: pointer;
 }
 
 .unitbtn:focus {outline:0;}

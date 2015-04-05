@@ -605,7 +605,7 @@ vertical-align: middle;
 margin-left: 329px;
 	margin-top: 30px;
 	
-width: 416px;
+width: 421px;
 	height:400px;
 	border: solid;
 	border-color: black;
@@ -826,6 +826,14 @@ margin: 0px 10px 10px 10px;
 height: 120px !important;
 width: 180px !important;
 cursor: pointer;
+}
+
+#faster{
+	padding-left:5px;
+}
+
+#slower{
+	padding-right:5px;
 }
 
 

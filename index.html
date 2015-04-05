@@ -28,6 +28,14 @@ function create_account() {
 
 }
 
+function lookup(){
+  var word = document.getElementById("search_input").value
+  if(dict[word]){
+    videoPlayback(word)
+  } else {
+    requestWord()
+  }
+}
 
 
 function selectTab(){
@@ -38,32 +46,18 @@ function selectTab(){
 
 
 }
-
-initalWordSelect = "true";
 function selectWord(){
+console.log("Iwas just selected" +event.target.getAttribute('id'));
   console.log(document.querySelector(".wordbtn.selected"))
-  if(document.querySelector(".wordbtn.selected")==null){
-    document.querySelector(".wordbtn").className="wordbtn selected"
-  }
-  else{
     document.querySelector(".wordbtn.selected").className="wordbtn"
     event.target.className="wordbtn selected"
-  }
-  // if(initalWordSelect=="false"){
-  // var prevWord = document.querySelectorAll(".wordbtn.selected");
-  // prevWord[0].className = prevWord[0].className.replace("wordbtn selected","wordbtn");
-  // event.target.className = "wordbtn selected"
-  //     }
-  // else{
-  //   document.querySelector(".wordbtn").className="wordbtn selected"
-  //   initalWordSelect = "false";
-  // }
+  console.log("insie selctedword");
+  console.log("This is the selected word: "+document.querySelector(".wordbtn.selected").getAttribute('id'))
+
 }
 
-
-initialUnitSelect = "true";   
 function selectUnit(){
-
+  // initialWordSelect='true';
   if(initialUnitSelect=="false"){
   var prevUnit = document.querySelectorAll(".unitbtn.selected");
   prevUnit[0].className = prevUnit[0].className.replace("unitbtn selected", "unitbtn");
@@ -73,6 +67,7 @@ function selectUnit(){
   else{
     initialUnitSelect = "false";
   }
+
 }
 
 function login() {
@@ -127,12 +122,11 @@ function viewRequests() {
 	}
 	html_string += "</table>";
 	document.getElementById("main_content_area").innerHTML = html_string;
-
-
 }
+
+
 function unit(num){
   selectUnit();
-  console.log("unit number: "+num)
   document.getElementById("unit1_words").innerHTML="";
   document.getElementById("unit2_words").innerHTML="";
   document.getElementById("unit3_words").innerHTML="";
@@ -141,15 +135,18 @@ function unit(num){
   var html_string = "<ul>";
    for(var wrd in dict){
    if(dict[wrd]["unit"]==num){
-    html_string += "<li><button class='wordbtn' onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\')\">";
+    html_string += "<li><button id='"+dict[wrd]["Display"]+"' class='wordbtn' onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\');selectWord()\">";
     html_string += dict[wrd]["Display"];
     html_string += "</button></li>";
    }
    }
     html_string += "</ul>";
-
   document.getElementById("unit"+num+"_words").innerHTML = html_string;
-
+  document.querySelector(".wordbtn").className="wordbtn selected";
+  console.log("This is the selected word: "+document.querySelector(".wordbtn.selected").getAttribute('id'))
+  videoPlayback(document.querySelector(".wordbtn.selected").getAttribute('id'))
+  // selectWord();
+  console.log("@@@@"+document.querySelector(".wordbtn").className);
 }
 
 
@@ -182,7 +179,7 @@ function myWords(){
 	   	html_string += "<li id="+wrd+" class='mywords_list'><div class='myWordsItem' ><div class='wrd_btn'>";
 	   	html_string += user_words[wrd]["Display"];
 	   	html_string += "</div>"+"<button  class='remove' onclick=\"removeWord("+wrd+")\">X</button>"+"<div class='myWordsImgContainer'   >"+
-       "<img src=\"teacher_vids/"+ wrd +".jpg\" style=\"   width:700px;height:500px\"  onclick=\"recorder()\"></div></div></li>";
+       "<img src=\"teacher_vids/"+ wrd +".jpg\" style=\"   width:700px;height:500px\"  onclick=\"recorder("+wrd+")\"></div></div></li>";
     }
   }
 	html_string += "</ul>";
@@ -218,12 +215,19 @@ function favoriteVideo(word){
    }
 }
 
-
+function recorder(word){
+  console.log(word.getAttribute('id'));
+  // console.log(user_words[word]["Display"]);
+  document.getElementById("main_content_area").innerHTML= "<br><br><button  class=\"btn\" onclick=\"myWords()\">Back</button>"+
+  "<video width=\"400\" controls><source src=\"teacher_vids/" + word.getAttribute('id').toLowerCase()
+   + ".mp4\" type=\"video/mp4\"></video></div>"; 
+  
+}
 
 function videoPlayback(word){
   // dictionary();
 
-  selectWord();
+
 
 	console.log("videoPlayback: "+word);
   html = "";
@@ -244,6 +248,8 @@ function videoPlayback(word){
 }
 
 function dictionary(){
+  initialUnitSelect = true;
+
    var html_string = "<div id ='left_side_bar' class='left_side_bar'>"+
          "<div class='box'>"+
            "<ul id='units'>"+
@@ -270,6 +276,7 @@ function dictionary(){
 	document.getElementById("main_content_area").innerHTML = html_string;
   // document.getElementById("main_content_area").innerHTML = left_html_string;
   unit(1);
+
   videoPlayback(dict['Salt']["Display"]);
 }
 
@@ -278,11 +285,7 @@ function player(){
 
 }
 
-function recorder(){
-  document.getElementById("main_content_area").innerHTML= "<img src=\"images\\dual_player.PNG\" style=\"width:700px;height:500px\">" +
-  "<br><br><button  class=\"btn\" onclick=\"myWords()\">Back</button>"
 
-}
 
 //****************************************************
 //          Start Finger Speller Funcions

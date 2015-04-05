@@ -11,6 +11,7 @@
 //    For the LOGIN
 //********************
 
+
 function create_account() {
 	document.getElementById("login").innerHTML =
 			"<div id='account'>" +
@@ -30,11 +31,13 @@ function create_account() {
 function lookup(){
   var word = document.getElementById("search_input").value
   if(dict[word]){
+
     videoPlayback(word)
     unit(dict[word].unit)
     console.log("Inside lookup"+dict[word].unit)
+
   } else {
-    requestWord()
+    requestWord(word);
   }
 }
 
@@ -200,9 +203,14 @@ function myWords(){
 }
 
 
-function requestWord(){
-  document.getElementById("main_content_area").innerHTML="<br><form id='rqst'><h3>Word:</h3><input type=\"text\" name=\"word\"><br>" +
+function requestWord(wrd){
+if(!wrd)
+{
+	wrd = "";
+}
+  document.getElementById("main_content_area").innerHTML="<br><form id='rqst'><h3>Word:</h3><input type=\"text\" value='"+wrd+"' name=\"word\"><br>" +
   "<br><h3>Name:<h3><input type=\"text\" name=\"name\"><br><br><input type=\"submit\" value=\"Submit\"></form>";
+  
     // document.getElementById("left_side_bar").innerHTML = "";
 
 

@@ -315,8 +315,7 @@ display:block;
 
 
 .left_side_bar  .box{
-	width:200px;
-	height: 337px;
+	width:200px;;
 	border:#A1A9AB solid 2px;
 }
 
@@ -340,25 +339,29 @@ display:block;
 }
 
 .wordbtn{
-		background-color: #ccc;
+	background-color: #ccc;
     color: #fff;
-    font-family: 'Gothic';
+    font-family: Century Gothic;
     font-size: 20px;
     text-decoration: none;
     cursor: pointer;
     border:none;
- width:100%;
+ 	width:180px;
+ 	height: 30px;
+ 	margin: 0px 0px 0px 20px;
 }
 
 .unitbtn{
 	background-color: #fcc;
     color: #fff;
-    font-family: 'Gothic';
+    font-family: Century Gothic;
     font-size: 20px;
     text-decoration: none;
     cursor: pointer;
     border:none;
-     width:100%;
+    width:100%;
+    height: 50px;
+    margin: none;
 }
 
 .unitbtn:visited{
@@ -860,9 +863,12 @@ cursor: pointer;
  	background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
   	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   	text-decoration: none;
+  	cursor: default;
 
 }
-
+#faster:active, #slower:active {
+	color: yellow;
+}
 
 
 .video_playback{

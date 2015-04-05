@@ -33,7 +33,7 @@ function selectTab(){
 function selectWord(){
 console.log("Iwas just selected" +event.target.getAttribute('id'));
   console.log(document.querySelector(".wordbtn.selected"))
-    document.querySelector(".wordbtn.selected").className="wordbtn"
+      if(document.querySelector(".wordbtn.selected")){document.querySelector(".wordbtn.selected").className="wordbtn";}
     event.target.className="wordbtn selected"
   console.log("insie selctedword");
   console.log("This is the selected word: "+document.querySelector(".wordbtn.selected").getAttribute('id'))
@@ -41,12 +41,20 @@ console.log("Iwas just selected" +event.target.getAttribute('id'));
 }
 
 function selectUnit(){
-  // initialWordSelect='true';
   if(initialUnitSelect=="false"){
-  var prevUnit = document.querySelectorAll(".unitbtn.selected");
-  prevUnit[0].className = prevUnit[0].className.replace("unitbtn selected", "unitbtn");
-  event.target.className = "unitbtn selected"
-  // selectWord();
+  if(document.querySelector(".unitbtn.selected"))
+  {
+  	var prevUnit = document.querySelectorAll(".unitbtn.selected");
+  	prevUnit[0].className = prevUnit[0].className.replace("unitbtn selected", "unitbtn");
+  }
+
+ 	if(event.target.className == "unitbtn")
+  	{
+  		event.target.className = "unitbtn selected";
+  	}
+  	else{event.target.className = "unitbtn";}
+  	
+  //selectWord();
     }
   else{
     initialUnitSelect = "false";
@@ -54,19 +62,6 @@ function selectUnit(){
 
 }
 
-function login() {
-	document.getElementById("login").innerHTML =
-			"<div id='input'>" +
-			"Username:<br>" +
-			"<input type='text' name='user_id' size='30'><br><br>"+
-			"<div id='acc' onclick='create_account()' style='cursor: pointer'>Create an account</div>"+
-			"Password:<br>"+
-			"<input type='password' name='password' size='30' height='10'>"+
-			"<br><br>"+
-			"<input type='submit' value='Login' onclick='initial_load()'>"+
-			"</div>";
-
-}
 var x = 'user';
 function initial_load() {
 	x = document.getElementById('user_id').value;
@@ -108,29 +103,38 @@ function viewRequests() {
 	document.getElementById("main_content_area").innerHTML = html_string;
 }
 
-
 function unit(num){
-  selectUnit();
-  document.getElementById("unit1_words").innerHTML="";
-  document.getElementById("unit2_words").innerHTML="";
-  document.getElementById("unit3_words").innerHTML="";
+  if(initialUnitSelect === "false"){
+  if(num == 1){document.getElementById("unit1_words").innerHTML=""; if(open1){open1 = false;}else{open1 = true;}}
+  if(num == 2){document.getElementById("unit2_words").innerHTML=""; if(open2){open2 = false;}else{open2 = true;}}
+  if(num == 3){document.getElementById("unit3_words").innerHTML=""; if(open3){open3 = false;}else{open3 = true;}}}
+	
 
-
+if((open1 && num== 1) || (open2 && num==2) || (open3 && num==3))
+{
   var html_string = "<ul>";
+  var i = 0;
    for(var wrd in dict){
    if(dict[wrd]["unit"]==num){
-    html_string += "<li><button id='"+dict[wrd]["Display"]+"' class='wordbtn' onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\');selectWord()\">";
+   
+	html_string += "<li><button id='"+dict[wrd]["Display"]+"' class='";
+	if(initialUnitSelect == "false"){html_string += "wordbtn";}
+	else{if(i == 0){html_string +="wordbtn selected";}else{html_string += "wordbtn";}}
+	html_string += "' onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\');selectWord()\">";
     html_string += dict[wrd]["Display"];
     html_string += "</button></li>";
+    i++;
    }
    }
     html_string += "</ul>";
   document.getElementById("unit"+num+"_words").innerHTML = html_string;
-  document.querySelector(".wordbtn").className="wordbtn selected";
-  console.log("This is the selected word: "+document.querySelector(".wordbtn.selected").getAttribute('id'))
-  videoPlayback(document.querySelector(".wordbtn.selected").getAttribute('id'))
+
+  //console.log("This is the selected word: "+document.querySelector(".wordbtn.selected").getAttribute('id'))
+  //videoPlayback(document.querySelector(".wordbtn.selected").getAttribute('id'))
   // selectWord();
-  console.log("@@@@"+document.querySelector(".wordbtn").className);
+  //console.log("@@@@"+document.querySelector(".wordbtn").className);
+  }
+ selectUnit();
 }
 
 

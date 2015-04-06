@@ -22,20 +22,20 @@ function lookup(){
 }
 
 
-function selectTab(){
+function selectTab(event){
 
-// if( !ev ) ev = window.event;
-// console.log("This is the e:"+e);
-  // var prevtab = document.querySelectorAll(".navbtn.selected");
-  // prevtab[0].className = prevtab[0].className.replace("navbtn selected", "navbtn");
-  // var x = ev.target||e.srcElement;
-  // x.className = "navbtn selected"
+var event = window.event||event;
+var targ = event.target || event.srcElement;
+
+  var prevtab = document.querySelectorAll(".navbtn.selected");
+  prevtab[0].className = prevtab[0].className.replace("navbtn selected", "navbtn");
+
+  targ.className = "navbtn selected"
 
 
 }
 function selectWord(event){
-//console.log("Iwas just selected" +event.target.getAttribute('id'));
-  //console.log(document.querySelector(".wordbtn.selected"))
+
 var event = window.event || event;
 var targ = event.target || event.srcElement;
 
@@ -422,11 +422,11 @@ document.getElementById("imgContainer").style.borderColor = "#3498db";
 
   <div id="page_content">
     <div class='navigation'>
-      <ul><li><a href='javascript:;' class='navbtn selected' onclick='dictionary();selectTab()'>Dictionary</a></li>
-        <li><a href='javascript:;' class='navbtn' onclick='fingerSpeller();selectTab()'>Finger Speller</a></li>
-        <li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab()'>My Words</a></li>
-        <li><a href='javascript:;' class='navbtn' onclick='requestWord();selectTab()'>Request a word</a></li>
-        <li class='navbtn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login();selectTab()'></span></li>
+      <ul><li><a href='javascript:;' class='navbtn selected' onclick='dictionary();selectTab(event)'>Dictionary</a></li>
+        <li><a href='javascript:;' class='navbtn' onclick='fingerSpeller();selectTab(event)'>Finger Speller</a></li>
+        <li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab(event)'>My Words</a></li>
+        <li><a href='javascript:;' class='navbtn' onclick='requestWord();selectTab(event)'>Request a word</a></li>
+        <li class='navbtn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login();selectTab(event)'></span></li>
         <li  style='float: right; color: yellow; font-family: Century Gothic; padding-right: 10px'><span>Welcome, Joe!</span></li>
       </ul></div><br><div class='right_section'><div class='common_content'>
         <p id='main_content_area'>

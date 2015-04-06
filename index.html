@@ -24,23 +24,31 @@ function lookup(){
 
 function selectTab(){
 
-  var prevtab = document.querySelectorAll(".navbtn.selected");
-  prevtab[0].className = prevtab[0].className.replace("navbtn selected", "navbtn");
-  event.target.className = "navbtn selected"
+// if( !ev ) ev = window.event;
+// console.log("This is the e:"+e);
+  // var prevtab = document.querySelectorAll(".navbtn.selected");
+  // prevtab[0].className = prevtab[0].className.replace("navbtn selected", "navbtn");
+  // var x = ev.target||e.srcElement;
+  // x.className = "navbtn selected"
 
 
 }
-function selectWord(){
+function selectWord(event){
 //console.log("Iwas just selected" +event.target.getAttribute('id'));
   //console.log(document.querySelector(".wordbtn.selected"))
-      if(document.querySelector(".wordbtn.selected")){document.querySelector(".wordbtn.selected").className="wordbtn";}
-    event.target.className="wordbtn selected"
-  //console.log("insie selctedword");
-  //console.log("This is the selected word: "+document.querySelector(".wordbtn.selected").getAttribute('id'))
+var event = window.event || event;
+var targ = event.target || event.srcElement;
+
+    if(document.querySelector(".wordbtn.selected"))
+      {document.querySelector(".wordbtn.selected").className="wordbtn";}
+      // var x = ev.target||ev.srcElement;  
+    targ.className="wordbtn selected"
 
 }
 
-function selectUnit(){
+function selectUnit(ev){
+
+
   if(initialUnitSelect=="false"){
   if(document.querySelector(".unitbtn.selected"))
   {
@@ -48,13 +56,13 @@ function selectUnit(){
   	prevUnit[0].className = prevUnit[0].className.replace("unitbtn selected", "unitbtn");
   }
 
- 	if(event.target.className == "unitbtn")
-  	{
-  		event.target.className = "unitbtn selected";
-  	}
-  	else{event.target.className = "unitbtn";}
-  	
-  //selectWord();
+  // var x = ev.target||ev.srcElement;
+ 	// if(x.className == "unitbtn")
+  // 	{
+  // 		x.className = "unitbtn selected";
+  // 	}
+  // 	else{x.className = "unitbtn";}
+  // //selectWord();
     }
   else{
     initialUnitSelect = "false";
@@ -120,7 +128,7 @@ if((open1 && num== 1) || (open2 && num==2) || (open3 && num==3))
 	html_string += "<li><button id='"+dict[wrd]["Display"]+"' class='";
 	if(initialUnitSelect == "false"){html_string += "wordbtn";}
 	else{if(i == 0){html_string +="wordbtn selected";}else{html_string += "wordbtn";}}
-	html_string += "' onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\');selectWord()\">";
+	html_string += "' onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\');selectWord(event)\">";
     html_string += dict[wrd]["Display"];
     html_string += "</button></li>";
     i++;

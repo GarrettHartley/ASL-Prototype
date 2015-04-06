@@ -184,13 +184,6 @@ display:block;
 
 }
 
-a .navbtn .selected{
-	color: white !important;
-	border-left: 2px dotted white !important;
-	border-right: 2px dotted white !important;
-}
-
-
 
 .navigation a{
 	display:block;
@@ -205,6 +198,7 @@ a .navbtn .selected{
 	width: 159px !important;
 	border-left: 2px dotted white !important;
 	border-right: 2px dotted white !important;
+	background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
 }
 
 .navigation li{
@@ -633,13 +627,10 @@ height:500px;
 
 
 #imgContainer{
-vertical-align: middle;
-	
-margin-left: 329px;
-	margin-top: 30px;
-	
-width: 421px;
-	height:400px;
+	vertical-align: middle;
+	margin-left: 339px;
+	width: 401px;
+	height:380px;
 	border: solid;
 	border-color: black;
 
@@ -652,8 +643,10 @@ width: 421px;
 	}
 
 #FScontrols{
-	margin-left:329px;
-	width: 450px;
+	margin-left:339px;
+	width: 407px;
+	height: 30px;
+	background-image: linear-gradient(to bottom, #3498db, #2980b9);
 	list-style-type: none;
 }
 
@@ -677,9 +670,7 @@ width: 421px;
 	line-height: 28px;
 	height: 30px;
 }
-#FScontrols li:last-child{
-	width:136px;
-	}
+
 
 #FScontrols a{
 		color:#FFFFFF;
@@ -700,7 +691,10 @@ width: 421px;
 
 
 #inputWord{
-	width:100px;
+	width:400px;
+	margin: 0px 0px 20px 339px !important;
+	border: 1px solid black !important;
+	height: 22px;
 }
 
 
@@ -747,6 +741,7 @@ width: 421px;
 	width: 980px;
 	height: 400px;
 	margin-left: 65px;
+	box-shadow: 3px 3px 2px gray;
 }
 
 input[type=text], input[type=password]{
@@ -867,13 +862,16 @@ width: 180px !important;
 cursor: pointer;
 }
 
-#faster{
-	padding-left:5px;
+#faster, #slower{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+#cur_spd {
+	padding-left: 5px;
+	padding-right: 25px;
 }
 
-#slower{
-	padding-right:5px;
-}
+
 
 
 #faster:hover, #slower:hover{
@@ -908,7 +906,7 @@ End MyWords content
 
 form#rqst {
 	margin-left: 31em;
-	margin-top: 5em;
+	margin-top: 2em;
 	margin-bottom: 5em;
 	border: 1px solid #cccccc;
 	padding-left: 60px;

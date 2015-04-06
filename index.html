@@ -190,12 +190,15 @@ function myWords(){
 
 
 function requestWord(wrd){
+var html_string;
 if(!wrd)
 {
 	wrd = "";
 }
-  document.getElementById("main_content_area").innerHTML="<br><form id='rqst'><h3>Request Word:</h3><input type=\"text\" value='"+wrd+"' name=\"word\"><br>" +
-  "<br><h3>Name:<h3><input type=\"text\" name=\"name\"><br><br><input type=\"submit\" value=\"Submit\"></form>";
+else{html_string += "<p style='text-align: center; color: black; font-size: 20px; font-family: Century Gothic'>\""+wrd+"\" not currently in dictionary</p>";}
+	html_string += "<form id='rqst'><h3>Request Word:</h3><input type=\"text\" value='"+wrd+"' name=\"word\"><br>" +
+	"<br><h3>Name:<h3><input type=\"text\" name=\"name\"><br><br><input type=\"submit\" value=\"Submit\"></form>";
+    document.getElementById("main_content_area").innerHTML= html_string;
   
 }
 
@@ -293,29 +296,28 @@ function player(){
 //****************************************************
 
 function fingerSpeller(){
-  document.getElementById("main_content_area").innerHTML= "<div id=' FScontainer'>" +
+  document.getElementById("main_content_area").innerHTML= "<div id=' FScontainer'><input id='inputWord' type='text' value='Enter text here and hit play!'>" +
     "<div id='imgContainer'>" +
       "<img id='spellerImage' src='letter_images/A.GIF'>"+
     "</div>"+
     "<div id='FScontrols'>"+
       "<ul>"+
-        "<li id='pause' onclick='pause()' class='btn'><div class='buttonContainer'><img id='pauseCSS' src='Widgets/pause.png'></div>"+
-          "</li>"+
         "<li id='play' onclick='play()' class='btn' ><div class='buttonContainer'><img id ='playCSS' src='Widgets/play.png'></div>"+
+          "</li>"+
+          "<li id='pause' onclick='pause()' class='btn'><div class='buttonContainer'><img id='pauseCSS' src='Widgets/pause.png'></div>"+
           "</li>"+
         "<li id='slower' class='btn' onclick='slower()' >slower"+
          "</li>"  +
        "<li id='faster' class='btn' onclick='faster()'>faster"+
           "</li> " +
+        "<li id='cur_spd' class='btn'>x1</li>"+
         "<li id='prev' class='btn' onclick='previous()''><div class='buttonContainer'><img id='leftCSS' src='Widgets/l_arrow.png'></div>"+
           "</li> "+
         "<li id='next' class='btn' onclick='next()'><div class='buttonContainer'><img id='rightCSS' src='Widgets/r_arrow.png'></div>"+
           "</li> " +
-        "<li ><input id='inputWord' type='text'>" +
-        "</li>" +
      "</ul>" +
     "<div>" +
-  "<div>"
+  "<div>";
 
     // document.getElementById("left_side_bar").innerHTML = "";
 

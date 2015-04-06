@@ -1,6 +1,6 @@
 var dict = {
 	Salt: {url: 'teacher_vids/salt', Display: 'Salt', unit: '1'},
-	Salad: {url:'teacher_vids/salad', Display: 'Salad', unit: '2'},
+	Salad: {url:'teacher_vids/salad', Display: 'Salad', unit: '1'},
 	Saint: {url:'teacher_vids/saint', Display: 'Saint', unit: '3'},
 	Simple: {url:'teacher_vids/simple', Display: 'Simple', unit: '3'},
 	Screwdriver: {url:'teacher_vids/screwdriver', Display: 'Screwdriver', unit: '2'},

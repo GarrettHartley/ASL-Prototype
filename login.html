@@ -15,15 +15,14 @@
 		document.getElementById("login").innerHTML = 
 				"<form id='account'>" +
 				"Choose Username:<br>" +
-				"<input class='log' type='text' name='user_id' size='30'>"+
-				"<div id='acc' onclick='login()' style='cursor: pointer'>Login</div>"+
+				"<input class='log' type='text' name='user_id' size='30'><br><br>"+
 				"Choose Password:<br>"+
 				"<input class='log' type='password' name='password' size='30' height='10'>"+
 				"<br><br>"+
 				"Re-enter Password:<br>"+
 				"<input class='log' type='password' name='password2' size='30' height='10'>"+
 				"<br><br>"+
-				"<input type='submit' value='Continue' onclick='login()'>"+
+				"<input type='submit' value='Continue' onclick='check(this.form)'>"+
 				"</form>";
 	}
 	function login() {

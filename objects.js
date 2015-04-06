@@ -9,6 +9,9 @@ var dict = {
 var current_user = 'Joe';
 var logged_in = false;
 
+var open1 = true;
+var open2 = false;
+var open3 = false;
 var user_words = {};
 
 var finger_spell = {

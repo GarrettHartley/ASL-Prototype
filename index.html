@@ -12,30 +12,10 @@
 //********************
 
 
-function create_account() {
-	document.getElementById("login").innerHTML =
-			"<div id='account'>" +
-			"Choose Username:<br>" +
-			"<input type='text' name='user_id' size='30'>"+
-			"<div id='acc' onclick='login()' style='cursor: pointer'>Login</div>"+
-			"Choose Password:<br>"+
-			"<input type='password' name='password' size='30' height='10'>"+
-			"<br><br>"+
-			"Re-enter Password:<br>"+
-			"<input type='password' name='password2' size='30' height='10'>"+
-			"<br><br>"+
-			"<input type='submit' value='Continue' onclick='login()'>"+
-			"</div>";
-}
-
 function lookup(){
   var word = document.getElementById("search_input").value
   if(dict[word]){
-
-    videoPlayback(word)
-    unit(dict[word].unit)
-    console.log("Inside lookup"+dict[word].unit)
-
+    videoPlayback(word);
   } else {
     requestWord(word);
   }
@@ -44,7 +24,6 @@ function lookup(){
 
 function selectTab(){
 
-  console.log("eventTarget"+event.target);
   var prevtab = document.querySelectorAll(".navbtn.selected");
   prevtab[0].className = prevtab[0].className.replace("navbtn selected", "navbtn");
   event.target.className = "navbtn selected"
@@ -52,27 +31,30 @@ function selectTab(){
 
 }
 function selectWord(){
-  console.log("hahahhahahahha"+event.target.className)
-  if(event.target.className!='find'){
-    document.querySelector(".wordbtn.selected").className="wordbtn"
+//console.log("Iwas just selected" +event.target.getAttribute('id'));
+  //console.log(document.querySelector(".wordbtn.selected"))
+      if(document.querySelector(".wordbtn.selected")){document.querySelector(".wordbtn.selected").className="wordbtn";}
     event.target.className="wordbtn selected"
-  }
-  else{
-    console.log('ahahhasdfasdfasdfasfd');
-  }
+  //console.log("insie selctedword");
+  //console.log("This is the selected word: "+document.querySelector(".wordbtn.selected").getAttribute('id'))
+
 }
 
 function selectUnit(){
-  // initialWordSelect='true';
   if(initialUnitSelect=="false"){
-     var prevUnit = document.querySelectorAll(".unitbtn.selected");
-      prevUnit[0].className = prevUnit[0].className.replace("unitbtn selected", "unitbtn");
-        if(event.target.className!='find'){
-        event.target.className = "unitbtn selected"
-        }
-        else{
-          selectWord()
-        }
+  if(document.querySelector(".unitbtn.selected"))
+  {
+  	var prevUnit = document.querySelectorAll(".unitbtn.selected");
+  	prevUnit[0].className = prevUnit[0].className.replace("unitbtn selected", "unitbtn");
+  }
+
+ 	if(event.target.className == "unitbtn")
+  	{
+  		event.target.className = "unitbtn selected";
+  	}
+  	else{event.target.className = "unitbtn";}
+  	
+  //selectWord();
     }
   else{
     initialUnitSelect = "false";
@@ -80,19 +62,6 @@ function selectUnit(){
 
 }
 
-function login() {
-	document.getElementById("login").innerHTML =
-			"<div id='input'>" +
-			"Username:<br>" +
-			"<input type='text' name='user_id' size='30'><br><br>"+
-			"<div id='acc' onclick='create_account()' style='cursor: pointer'>Create an account</div>"+
-			"Password:<br>"+
-			"<input type='password' name='password' size='30' height='10'>"+
-			"<br><br>"+
-			"<input type='submit' value='Login' onclick='initial_load()'>"+
-			"</div>";
-
-}
 var x = 'user';
 function initial_load() {
 	x = document.getElementById('user_id').value;
@@ -134,29 +103,38 @@ function viewRequests() {
 	document.getElementById("main_content_area").innerHTML = html_string;
 }
 
-
 function unit(num){
-  selectUnit();
-  document.getElementById("unit1_words").innerHTML="";
-  document.getElementById("unit2_words").innerHTML="";
-  document.getElementById("unit3_words").innerHTML="";
+  if(initialUnitSelect === "false"){
+  if(num == 1){document.getElementById("unit1_words").innerHTML=""; if(open1){open1 = false;}else{open1 = true;}}
+  if(num == 2){document.getElementById("unit2_words").innerHTML=""; if(open2){open2 = false;}else{open2 = true;}}
+  if(num == 3){document.getElementById("unit3_words").innerHTML=""; if(open3){open3 = false;}else{open3 = true;}}}
+	
 
-
-  var html_string = "<ul id='unitWords>'";
+if((open1 && num== 1) || (open2 && num==2) || (open3 && num==3))
+{
+  var html_string = "<ul>";
+  var i = 0;
    for(var wrd in dict){
    if(dict[wrd]["unit"]==num){
-    html_string += "<li><button id='"+dict[wrd]["Display"]+"' class='wordbtn' onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\');selectWord()\">";
+   
+	html_string += "<li><button id='"+dict[wrd]["Display"]+"' class='";
+	if(initialUnitSelect == "false"){html_string += "wordbtn";}
+	else{if(i == 0){html_string +="wordbtn selected";}else{html_string += "wordbtn";}}
+	html_string += "' onclick=\"videoPlayback(\'"+ dict[wrd]["Display"] +"\');selectWord()\">";
     html_string += dict[wrd]["Display"];
     html_string += "</button></li>";
+    i++;
    }
    }
     html_string += "</ul>";
   document.getElementById("unit"+num+"_words").innerHTML = html_string;
-  document.querySelector(".wordbtn").className="wordbtn selected";
-  console.log("This is the selected word: "+document.querySelector(".wordbtn.selected").getAttribute('id'))
-  videoPlayback(document.querySelector(".wordbtn.selected").getAttribute('id'))
+
+  //console.log("This is the selected word: "+document.querySelector(".wordbtn.selected").getAttribute('id'))
+  //videoPlayback(document.querySelector(".wordbtn.selected").getAttribute('id'))
   // selectWord();
-  console.log("@@@@"+document.querySelector(".wordbtn").className);
+  //console.log("@@@@"+document.querySelector(".wordbtn").className);
+  }
+ selectUnit();
 }
 
 
@@ -208,12 +186,9 @@ if(!wrd)
 {
 	wrd = "";
 }
-  document.getElementById("main_content_area").innerHTML="<br><form id='rqst'><h3>Word:</h3><input type=\"text\" value='"+wrd+"' name=\"word\"><br>" +
+  document.getElementById("main_content_area").innerHTML="<br><form id='rqst'><h3>Request Word:</h3><input type=\"text\" value='"+wrd+"' name=\"word\"><br>" +
   "<br><h3>Name:<h3><input type=\"text\" name=\"name\"><br><br><input type=\"submit\" value=\"Submit\"></form>";
   
-    // document.getElementById("left_side_bar").innerHTML = "";
-
-
 }
 
 function favoriteVideo(word){
@@ -235,7 +210,7 @@ function recorder(word){
   // console.log(user_words[word]["Display"]);
   document.getElementById("main_content_area").innerHTML= "<br><br><button  class=\"btn\" onclick=\"myWords()\">Back</button>"+
   "<video width=\"400\" controls><source src=\"teacher_vids/" + word.getAttribute('id').toLowerCase()
-   + ".mp4\" type=\"video/mp4\"></video></div>"; 
+   + ".mp4\" type=\"video/mp4\"></video></video></div>"; 
   
 }
 
@@ -246,7 +221,9 @@ function videoPlayback(word){
 
 	console.log("videoPlayback: "+word);
   html = "";
-  html += "<div id='videoContainer'><div id='favoriteVideo' onclick= favoriteVideo('"+word+"')>";
+  html += "<div id='videoContainer'>"+"<div id='searchContainer'><input type='text' id='search_input'>"+
+          "<div onclick='lookup()' id='find'>Find</div> </div>"
+  +"<div id='favoriteVideo' onclick= favoriteVideo('"+word+"')>";
 
   if(word in user_words){
       html +="<img id='star' src='Widgets/star_clicked.png'></div>";
@@ -256,7 +233,7 @@ function videoPlayback(word){
   }
 
 
-	html += "<video width=\"400\" controls><source src=\"" + dict[word]["url"] + ".mp4\" type=\"video/mp4\"></video></div>";
+	html += "<video width=\"400\" controls><source src=\"" + dict[word]["url"] + ".mp4\" type=\"video/mp4\"></video><a id='vid_name'>"+word+"</a></div>";
 
 	html += document.getElementById("video_playback").innerHTML;
     document.getElementById("dictionary_video").innerHTML= html;
@@ -283,8 +260,8 @@ function dictionary(){
            "class='tfbutton'> </form>"+
            "<div id='dictionary_video'></div>"*/
 
-           html_string+="<div id='searchContainer'><input type='text' id='search_input'>"+
-          "<div id='findContainer'><button type='button' class ='find' onclick='lookup()'>Find</button></div> </div>"
+          //  html_string+="<div id='searchContainer'><input type='text' id='search_input'>"+
+          // "<div onclick='lookup()' id='find'>Find</div> </div>"
 
 					html_string += "<div id='dictionary_video'></div>"
 
@@ -296,7 +273,8 @@ function dictionary(){
 }
 
 function player(){
-  document.getElementById("main_content_area").innerHTML= "<div id = videoConainer><video width=\"400\" controls><source src=\"stubb.mp4\" type=\"video/mp4\"></video></div>"
+  document.getElementById("main_content_area").innerHTML= "<div id = videoConainer><div id='searchContainer'><input type='text' id='search_input'>"+
+          "<div onclick='lookup()' id='find'>Find</div> </div><video width=\"400\" controls><source src=\"stubb.mp4\" type=\"video/mp4\"></video></div>"
 
 }
 
@@ -473,8 +451,8 @@ This hidden div is needed for the playback functionality
 DO NOT REMOVE OR EDIT
 ***************************************
 <div id="video_playback" hidden="true">
-  <video id="video" width="680" height="400" autoplay></video>
-  <canvas id="canvas" width="680" height="400"></canvas>
+  <video id="video" width="435" height="395" autoplay></video>
+  <canvas id="canvas" width="500" height="328"></canvas>
 </div>
 
 </body></html>

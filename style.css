@@ -899,6 +899,8 @@ cursor: pointer;
 
 #video{
 	float:right;
+	border: 1px solid black;
+margin-top: 36px;
 }
 
 /**************************

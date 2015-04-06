@@ -14,6 +14,8 @@
 
 function lookup(){
   var word = document.getElementById("search_input").value
+  console.log(dict[word])
+  word = word.charAt(0).toUpperCase()+word.substr(1);
   if(dict[word]){
     videoPlayback(word);
   } else {
@@ -70,6 +72,19 @@ function selectUnit(ev){
 
 }
 
+function enterLookUp(event){
+  var event = window.event || event;
+  if(event.keyCode == 13)
+{
+    lookup();
+}
+else
+{
+    console.log('false');
+}
+
+}
+
 var x = 'user';
 function initial_load() {
 	x = document.getElementById('user_id').value;
@@ -79,7 +94,7 @@ function initial_load() {
       	"<ul><li><a href='javascript:;' class='navbtn' onclick='dictionary();selectTab()'>Dictionary</a></li>"+
         "<li><a href='javascript:;' class='navbtn' onclick='fingerSpeller();selectTab()'>Finger Speller</a></li>"+
         "<li><a href='javascript:;' class='navbtn' onclick='videoPlayback();selectTab()'>Video Playback</a></li>"+
-        "<li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab()'>My Words</a></li>"+
+        "<li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab()'>Favorites</a></li>"+
         "<li><a href='javascript:;' class='navbtn' onclick='viewRequests();selectTab()'>View Requests</a></li>"+
         "<li class='navbtn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login();selectTab()'></span></li>"+
     	"</ul></div><br><div class='right_section'><div class='common_content'><p id='main_content_area'></p></div></div>"+
@@ -90,7 +105,7 @@ function initial_load() {
       "<ul><li><a href='javascript:;' class='navbtn' onclick='dictionary();selectTab()'>Dictionary</a></li>"+
         "<li><a href='javascript:;' class='navbtn' onclick='fingerSpeller();selectTab()'>Finger Speller</a></li>"+
         "<li><a href='javascript:;' class='navbtn' onclick='videoPlayback();selectTab()'>Video Playback</a></li>"+
-        "<li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab()'>My Words</a></li>"+
+        "<li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab()'>Favorites</a></li>"+
         "<li><a href='javascript:;' class='navbtn' onclick='requestWord();selectTab()'>Request a word</a></li>"+
         "<li class='navbtn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login();selectTab()'></span></li>"+
     	"</ul></div><br><div class='right_section'><div class='common_content'><p id='main_content_area'></p></div></div>"+
@@ -229,7 +244,7 @@ function videoPlayback(word){
 
 	console.log("videoPlayback: "+word);
   html = "";
-  html += "<div id='videoContainer'>"+"<div id='searchContainer'><input type='text' id='search_input'>"+
+  html += "<div id='videoContainer'>"+"<div id='searchContainer'><input onkeypress='enterLookUp(event)' type='text' id='search_input'>"+
           "<div onclick='lookup()' id='find'>Find</div> </div>"
   +"<div id='favoriteVideo' onclick= favoriteVideo('"+word+"')>";
 
@@ -424,7 +439,7 @@ document.getElementById("imgContainer").style.borderColor = "#3498db";
     <div class='navigation'>
       <ul><li><a href='javascript:;' class='navbtn selected' onclick='dictionary();selectTab(event)'>Dictionary</a></li>
         <li><a href='javascript:;' class='navbtn' onclick='fingerSpeller();selectTab(event)'>Finger Speller</a></li>
-        <li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab(event)'>My Words</a></li>
+        <li class='navbtn' ><a href='javascript:;'  onclick='myWords();selectTab(event)'>Favorites</a></li>
         <li><a href='javascript:;' class='navbtn' onclick='requestWord();selectTab(event)'>Request a word</a></li>
         <li class='navbtn' style='color: yellow; float: right; padding-right: 10px'><span id='user_name' onclick='login();selectTab(event)'></span></li>
         <li  style='float: right; color: yellow; font-family: Century Gothic; padding-right: 10px'><span>Welcome, Joe!</span></li>
@@ -459,7 +474,7 @@ This hidden div is needed for the playback functionality
 DO NOT REMOVE OR EDIT
 ***************************************
 <div id="video_playback" hidden="true">
-  <video id="video" width="435" height="395" autoplay></video>
+  <video id="video" width="432" height="324" autoplay></video>
   <canvas id="canvas" width="500" height="328"></canvas>
 </div>
 

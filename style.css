@@ -287,6 +287,7 @@ navigation .selected{
 	margin:0px!important;
 }
 
+
 .dictionary_video{
 	float: right;
 }
@@ -562,6 +563,18 @@ h1, h2, h3, h4, h5, h6 {font-family: Century Gothic;}
 #favoriteVideo img{
 	max-width: 100%;
 	max-height: 100%;
+}
+
+#vid_name {
+	position: absolute;
+	left: 10px;
+	font-family: Century Gothic;
+	top: 10px;
+	z-index:2;
+	color: white;
+	font-size: 25px;
+	text-decoration: none;
+	cursor: default;
 }
 
 	/****************************************************

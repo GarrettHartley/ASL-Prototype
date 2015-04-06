@@ -213,7 +213,7 @@ function recorder(word){
   // console.log(user_words[word]["Display"]);
   document.getElementById("main_content_area").innerHTML= "<br><br><button  class=\"btn\" onclick=\"myWords()\">Back</button>"+
   "<video width=\"400\" controls><source src=\"teacher_vids/" + word.getAttribute('id').toLowerCase()
-   + ".mp4\" type=\"video/mp4\"></video></div>"; 
+   + ".mp4\" type=\"video/mp4\"></video></video></div>"; 
   
 }
 
@@ -234,7 +234,7 @@ function videoPlayback(word){
   }
 
 
-	html += "<video width=\"400\" controls><source src=\"" + dict[word]["url"] + ".mp4\" type=\"video/mp4\"></video></div>";
+	html += "<video width=\"400\" controls><source src=\"" + dict[word]["url"] + ".mp4\" type=\"video/mp4\"></video><a id='vid_name'>"+word+"</a></div>";
 
 	html += document.getElementById("video_playback").innerHTML;
     document.getElementById("dictionary_video").innerHTML= html;

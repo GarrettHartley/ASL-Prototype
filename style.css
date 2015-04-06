@@ -746,6 +746,7 @@ width: 421px;
 	background-size: 980px 400px;
 	width: 980px;
 	height: 400px;
+	margin-left: 65px;
 }
 
 input[type=text], input[type=password]{
@@ -754,6 +755,11 @@ input[type=text], input[type=password]{
 	font-size: 15px;
 	padding-left: 5px;
 }
+
+.log {
+	width: 245px;
+}
+
 input[type=submit] {
 padding:5px 15px;
 background-image: linear-gradient(to bottom, #3cb0fd, #3498db);

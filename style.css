@@ -184,11 +184,10 @@ display:block;
 
 }
 
-navigation .selected{
-	background-image: linear-gradient(to bottom, #3498db, #2980b9);
+a .navbtn .selected{
 	color: white !important;
-	border-left: 2px dotted white;
-	border-right: 2px dotted white;
+	border-left: 2px dotted white !important;
+	border-right: 2px dotted white !important;
 }
 
 
@@ -204,6 +203,8 @@ navigation .selected{
 
 .navigation a.selected {
 	width: 159px !important;
+	border-left: 2px dotted white !important;
+	border-right: 2px dotted white !important;
 }
 
 .navigation li{
@@ -394,6 +395,9 @@ outline:none;
 	width: 330px;
 	height:28px;
 	float: left;
+}
+#search_input:focus {
+	outline:0;
 }
 #findContainer{
 float: right;

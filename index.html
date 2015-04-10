@@ -311,9 +311,6 @@ function player(){
 //****************************************************
 
 function changeImage(event,url){
-  console.log("changeImage");
-  console.log(url)
-  console.log(event.target);
   event.target.src=url;
 }
 
@@ -356,14 +353,11 @@ function play(){
 
     currentFSWord = document.getElementById('inputWord').value;
     var timer = setInterval(function () {
-        console.log("turn no. " + charIndex);
         if (isPaused==true) {
           isPaused = false;
             clearInterval(timer);
         }
-
         display();
-      console.log(charIndex);
       if (charIndex >= currentFSWord.length-1) {
           charIndex = 0;
           clearInterval(timer);
@@ -432,13 +426,31 @@ window.onload = function() {
 };
 
 function display(){
-
   setTimeout(function() {
         document.getElementById("imgContainer").style.borderColor = "black";
 }, 400);
 document.getElementById("imgContainer").style.borderColor = "#3498db";
+  document.getElementById('spellerImage').style.width = "100%";
+  document.getElementById('spellerImage').style.height = "100%";
+if(!isAlpha(currentFSWord.charAt(charIndex))){
+  document.getElementById('spellerImage').style.width = "0px";
+  document.getElementById('spellerImage').style.height = "0px";
+}
   document.getElementById('spellerImage').src = "letter_images/"+currentFSWord.charAt(charIndex).toUpperCase()+".GIF"
 }
+
+   function isAlpha(currentChar)
+   {
+      charCode = currentChar.charCodeAt(0);
+   
+      if(((charCode > 64) && (charCode <  91)) ||
+        ((charCode > 96) && (charCode < 123)))
+      {
+         return true;
+      }
+   
+      return false;
+   }
 
 //****************************************************
 //          End Finger Speller Funcions

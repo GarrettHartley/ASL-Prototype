@@ -310,6 +310,13 @@ function player(){
 //          Start Finger Speller Funcions
 //****************************************************
 
+function changeImage(event,url){
+  console.log("changeImage");
+  console.log(url)
+  console.log(event.target);
+  event.target.src=url;
+}
+
 function fingerSpeller(){
   document.getElementById("main_content_area").innerHTML= "<div id=' FScontainer'><input id='inputWord' type='text' value='Enter text here and hit play!'>" +
     "<div id='imgContainer'>" +
@@ -317,18 +324,18 @@ function fingerSpeller(){
     "</div>"+
     "<div id='FScontrols'>"+
       "<ul>"+
-        "<li id='play' onclick='play()' class='btn' ><div class='buttonContainer'><img id ='playCSS' src='Widgets/play.png'></div>"+
+        "<li id='play' onclick='play()' class='btn' ><div class='buttonContainer'><img onmouseover=\"changeImage(event,'Widgets/play_hover.png')\" onmouseleave=\"changeImage(event,'widgets/play.png')\" onmousedown=\"changeImage(event,'widgets/play_active.png')\" onmouseup=\"changeImage(event,'widgets/play_hover.png')\" id ='playCSS' src='Widgets/play.png'></div>"+
           "</li>"+
-          "<li id='pause' onclick='pause()' class='btn'><div class='buttonContainer'><img id='pauseCSS' src='Widgets/pause.png'></div>"+
+          "<li id='pause' onclick='pause()' class='btn'><div class='buttonContainer'><img id='pauseCSS' onmouseover=\"changeImage(event,'widgets/pause_hover.png')\" onmouseleave=\"changeImage(event,'widgets/pause.png')\" onmousedown=\"changeImage(event,'widgets/pause_active.png')\" onmouseup=\"changeImage(event,'widgets/pause_hover.png')\" src='Widgets/pause.png'></div>"+
           "</li>"+
         "<li id='slower' class='btn' onclick='slower()' >slower"+
          "</li>"  +
        "<li id='faster' class='btn' onclick='faster()'>faster"+
           "</li> " +
-        "<li id='cur_spd' class='btn'>x1</li>"+
-        "<li id='prev' class='btn' onclick='previous()''><div class='buttonContainer'><img id='leftCSS' src='Widgets/l_arrow.png'></div>"+
+        "<li id='cur_spd' class='btn'>+0</li>"+
+        "<li id='prev' class='btn' onclick='previous()''><div class='buttonContainer'><img onmouseover=\"changeImage(event,'Widgets/l_arrow_hover.png')\" onmouseleave=\"changeImage(event,'widgets/l_arrow.png')\" onmousedown=\"changeImage(event,'widgets/l_arrow_active.png')\" onmouseup=\"changeImage(event,'widgets/l_arrow_hover.png')\" id='leftCSS' src='Widgets/l_arrow.png'></div>"+
           "</li> "+
-        "<li id='next' class='btn' onclick='next()'><div class='buttonContainer'><img id='rightCSS' src='Widgets/r_arrow.png'></div>"+
+        "<li id='next' class='btn' onclick='next()'><div class='buttonContainer'><img onmouseover=\"changeImage(event,'Widgets/r_arrow_hover.png')\" onmouseleave=\"changeImage(event,'widgets/r_arrow.png')\" onmousedown=\"changeImage(event,'widgets/r_arrow_active.png')\" onmouseup=\"changeImage(event,'widgets/r_arrow_hover.png')\" id='rightCSS' src='Widgets/r_arrow.png'></div>"+
           "</li> " +
      "</ul>" +
     "<div>" +
@@ -346,12 +353,6 @@ var counter = 0;
 var speed = 1000;
 
 function play(){
-  // if(isPaused == true){
-  //   isPaused = false;
-  // }
-  // else{
-  //   isPaused = true;
-  // }
 
     currentFSWord = document.getElementById('inputWord').value;
     var timer = setInterval(function () {
@@ -378,15 +379,35 @@ function pause(){
   isPaused = true;
 }
 
+var trackSpeed = 0;
+
 function slower(){
-  if(speed<2000){
-    speed+=200;
+    if(trackSpeed>-3){
+    trackSpeed--;
+    if(trackSpeed>0){
+        document.getElementById('cur_spd').innerHTML="+"+trackSpeed;
+        speed+=200;
+    }
+    else{
+      document.getElementById('cur_spd').innerHTML=trackSpeed;
+        speed+=200;
+    }
   }
+  
 }
 
 function faster(){
-  if(speed>200){
-    speed-=200;
+  //if negative 
+  if(trackSpeed<3){
+    trackSpeed++;
+    if(trackSpeed>0){
+        document.getElementById('cur_spd').innerHTML="+"+trackSpeed;
+        speed-=200;
+    }
+    else{
+      document.getElementById('cur_spd').innerHTML=trackSpeed;
+        speed-=200;
+    }
   }
 }
 

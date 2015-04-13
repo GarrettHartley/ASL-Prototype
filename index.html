@@ -234,9 +234,9 @@ function favoriteVideo(word){
 function recorder(word){
   console.log(word.getAttribute('id'));
   // console.log(user_words[word]["Display"]);
-  document.getElementById("main_content_area").innerHTML= "<br><br><button  class=\"btn\" onclick=\"myWords()\">Back</button>"+
+  document.getElementById("main_content_area").innerHTML= "<br><br>"+
   "<video width=\"400\" controls><source src=\"teacher_vids/" + word.getAttribute('id').toLowerCase()
-   + ".mp4\" type=\"video/mp4\"></video></video></div>"; 
+   + ".mp4\" type=\"video/mp4\"></video></video></div><br><br><button class=\"btn\" id='back' onclick=\"myWords()\">Back</button>"; 
   
 }
 

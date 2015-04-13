@@ -378,6 +378,16 @@ border:none;
 outline:none;
 }
 
+#back {
+padding: 5px 10px;
+background-image: linear-gradient(to bottom, #3CB0FD, #3498DB);
+font-family: Century Gothic;
+color: #FFF;
+border: 0px none;
+cursor: pointer;
+border-radius: 5px;
+}
+
 #searchContainer{
 		/* margin-left: 2% !important; */
 	
